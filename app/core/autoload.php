@@ -1,7 +1,7 @@
 <?php
 
 require_once ROOT . '/config/config.php';
-require_once ROOT . '/config/Database.php';
+require_once ROOT . '/config/Connection.php';
 require_once ROOT . '/controller/Controller.php';
 require_once ROOT . '/model/Model.php';
 require_once ROOT . '/model/Role.php';

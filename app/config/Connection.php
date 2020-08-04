@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Config;
+namespace App\Database;
 
 use PDO;
 use PDOException;
@@ -13,7 +13,7 @@ use PDOException;
 * | Connecting to the database using PDO.
 * |
  */
-class Database
+class Connection
 {
     private $servername;
     private $username;

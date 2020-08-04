@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use App\Config\Database;
+use App\Database\Connection;
 use App\Helper\Logger;
 use App\Helper\Validator;
 use PDOException;
@@ -24,7 +24,7 @@ class Model
 
     public function __construct()
     {
-        $this->pdo = new Database;
+        $this->pdo = new Connection;
         $this->pdo = $this->pdo->connect();
         $this->validator = new Validator;
     }
