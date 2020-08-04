@@ -94,6 +94,7 @@ class Controller
     {
         // setting common variables to be used in frontend or backend.
         $data['user'] = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+        $data['user']['reading_list_count'] = $this->model('user')->getReadinglistCount((int)$data['user']['id']);
         // setting the response for the view.
         if (isset($_SESSION['response'])) {
             $data['response']['message'] = $_SESSION['response']['message'];

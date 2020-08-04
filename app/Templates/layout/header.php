@@ -38,7 +38,11 @@ use App\Model\Role;
                         <img src="<?= HOST . "assets/uploads/{$data['user']['image']}"; ?>" alt="profile" />
                     </button>
                     <ul class="navigation__user__content dropdown__content">
-                        <li class="dropdown__item"><a href="/account/reading-list">Reading list[0]</a></li>
+                        <li class="dropdown__item">
+	                        <a href="/account/reading-list">
+		                        Reading list[<?= $data['user']['reading_list_count'] ? $data['user']['reading_list_count'] : 0; ?>]
+	                        </a>
+                        </li>
                         <li class="dropdown__item"><a href="/account/dashboard">Dashboard</a></li>
                         <li class="dropdown__item"><a href="/account/drafts">Drafs[0]</a></li>
                         <li class="dropdown__item"><a href="/account/settings">Account Settings</a></li>
