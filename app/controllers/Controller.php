@@ -1,23 +1,16 @@
 <?php
-
 namespace App\Controller;
 
+use App\Helper\Elements;
 use App\Helper\Request;
 use App\Model\Model;
 use App\Model\Role;
-
 /**
-|--------------------------------------------------------------------------
-| Main app controller
-|--------------------------------------------------------------------------
-|
-| This controller will be extended by all other controllers so
-| every useful/re-usable method will be placed here so it can be inherited.
-|
+ * This controller will be extended by all other controllers so
+ * every useful/re-usable method will be inherited.
  */
 class Controller
 {
-
     protected $request;
     protected $referer;
 
@@ -28,35 +21,35 @@ class Controller
     }
 
     /**
-     * Require and instantiate a model.
+     * Instantiate a model.
      * @param string $model The name of the model.
      * @return Model        The new model instance.
      */
     protected function model(string $model): Model
     {
         $model = ucfirst($model);
-        require_once ROOT . '/model/' . "{$model}.php";
-        $model = "App\Model\\{$model}";
+        $model = MODELS_NAMESPACE . $model;
         return new $model;
     }
 
     /**
      * Require a view.
-     * @param string $view The view that should be rendered.
-     * @param array $data  Data that will be sent to the view.
+     * @param string $folder   The folder where the view is located.
+     * @param string $view     The view that should be rendered.
+     * @param array|null $data (optional) Data that will be sent to the view.
      * @return void
      */
-    protected function render(string $view, array $data = []): void
+    protected function render(string $folder, string $view, ?array $data = []): void
     {
         $data = $this->__setCommonViewVariables($data);
-        require_once ROOT . '/templates/layout/header.php';
-        require_once ROOT . '/templates/' . "{$view}.php";
-        require_once ROOT . '/templates/layout/footer.php';
+        Elements::add('header', $data);
+        require_once TEMPLATES . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . "$view.php";
+        Elements::add('footer');
     }
 
     /**
      * Redirect to a given location.
-     * @param string $location
+     * @param string $location The given location.
      * @return void
      */
     protected function redirect(string $location): void
@@ -86,15 +79,17 @@ class Controller
     }
 
     /**
-     * Adding common variables to the view + setting cookies to be used in frontend.
+     * Adding common variables to the view + setting cookies or session/local storage to be used in frontend.
      * @param array $data
      * @return array
      */
     private function __setCommonViewVariables(array $data): array
     {
         // setting common variables to be used in frontend or backend.
-        $data['user'] = isset($_SESSION['user']) ? $_SESSION['user'] : null;
-        $data['user']['reading_list_count'] = $this->model('user')->getReadinglistCount((int)$data['user']['id']);
+        if (isset($_SESSION['user'])) {
+            $data['user'] = $_SESSION['user'];
+            $data['user']['reading_list_count'] = $this->model('user')->getReadinglistCount((int)$data['user']['id']);
+        }
         // setting the response for the view.
         if (isset($_SESSION['response'])) {
             $data['response']['message'] = $_SESSION['response']['message'];
@@ -109,7 +104,8 @@ class Controller
     }
 
     /**
-     * @param $string
+     * Method used to 'slugify' a given string.
+     * @param $string 'The string to be 'slugified'
      * @return string
      */
     public function slugify($string): string
@@ -117,7 +113,11 @@ class Controller
         return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string), '-')) . uniqid();
     }
 
-    protected function isAdminOrAuthor()
+    /**
+     * Check if the logged user is an admin/author.
+     * @return bool
+     */
+    protected function isAdminOrAuthor(): bool
     {
         if (isset($_SESSION['user'])) {
             if (

@@ -1,23 +1,14 @@
 <?php
-
 namespace App\Controller;
 
 use App\Model\User;
 use Exception;
-
-
 /**
- * |--------------------------------------------------------------------------
-* | Authentication controller
-* |--------------------------------------------------------------------------
-* |
-* | Basically the 'security' controller, used for logging in and registering.
-* |
+ * Basically the 'security' controller, used for logging in and registering.
  * @property User $User
  */
 class AuthController extends Controller
 {
-
     /**
      * Used to sign in the user.
      * @throws Exception
@@ -114,7 +105,7 @@ class AuthController extends Controller
                 $this->newResponse($response);
                 $this->redirect('/');
             } else {
-                $this->render('auth/register', [
+                $this->render('auth' , 'register', [
                     'title' => 'Register',
                 ]);
             }
@@ -123,9 +114,9 @@ class AuthController extends Controller
 
     /**
      * Method used to 'logout', removing user from session.
-     * @return bool
+     * @return void
      */
-    public function logout(): bool
+    public function logout(): void
     {
         unset($_SESSION['user']);
         $response = [

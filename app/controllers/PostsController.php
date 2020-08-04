@@ -1,24 +1,15 @@
 <?php
-
 namespace App\Controller;
 
 use App\Model\Post;
 use App\Model\Tag;
-use Exception;
-
 /**
-* |--------------------------------------------------------------------------
-* | Posts controller
-* |--------------------------------------------------------------------------
-* |
-* | This will serve as the posts controller.
-* |
+* This will serve as the posts controller.
  * @property Post $Post
  * @property Tag $Tag
  */
 class PostsController extends Controller
 {
-
     /**
      * Used to create new posts.
      * @return void
@@ -63,7 +54,7 @@ class PostsController extends Controller
             /** @var Tag $Tag */
             $Tag = $this->model('tag');
             $tags = $Tag->findAll('tag');
-            $this->render('posts/write', [
+            $this->render('posts', 'write', [
                 'title' => 'Write a new post',
                 'tags' => $tags,
             ]);
@@ -78,7 +69,7 @@ class PostsController extends Controller
     {
         $Post = $this->model('post');
         $post = $Post->findBy('post', 'slug', $slug);
-        $this->render('posts/read', [
+        $this->render('posts' , 'read', [
             'title' => $post['title'],
             'post' => $post,
         ]);

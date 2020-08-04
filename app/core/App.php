@@ -1,23 +1,15 @@
 <?php
-
-define('ROOT', realpath(__DIR__ . '/..'));
-require_once 'autoload.php';
 /**
 |--------------------------------------------------------------------------
 | Main app
 |--------------------------------------------------------------------------
-|
 | The main App class which kickstarts everything being instantiated in
 | index.php with every new request.
-| Require all the needed files for the application with 'autoload.php'.
-|
  */
 class App
 {
-
-    private $controllerPath = ROOT . '/controller/HomeController.php';
-    private $controller = 'App\Controller\HomeController';
-    private $method = 'index';
+    private $controller = DEFAULT_CONTROLLER;
+    private $method = DEFAULT_METHOD;
     private $params = [];
 
     public function __construct()
@@ -48,25 +40,23 @@ class App
     }
 
     /**
-     * Method used to set and require the controller.
+     * Set the controller.
      * @param string|null $controller
-     * @return int
+     * @return void
      */
-    private function __setController(string $controller = null): int
+    private function __setController(?string $controller = null): void
     {
         if ($controller !== null) {
             $controller = ucfirst($controller);
-            $controllerPath = ROOT . "/controller/{$controller}Controller.php";
+            $controllerPath = CONTROLLERS . DIRECTORY_SEPARATOR . "{$controller}Controller.php";
             if (file_exists($controllerPath)) {
-                $this->controllerPath = $controllerPath;
-                $this->controller = "App\Controller\\{$controller}Controller";
+                $this->controller = CONTROLLERS_NAMESPACE . "{$controller}Controller";
             }
         }
-        return require_once $this->controllerPath;
     }
 
     /**
-     * Used to set method.
+     * Set the controller action.
      * @param string $method
      * @return void
      */

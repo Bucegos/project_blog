@@ -1,22 +1,20 @@
 <?php
-
 namespace App\Helper;
 /**
 |--------------------------------------------------------------------------
 | Elements class
 |--------------------------------------------------------------------------
-|
 | Used add elements on views.
-|
  */
 class Elements
 {
     /**
-     * @param string $element The name of the element.
-     * @param array $data     (optional) Array of data.
+     * @param string $element  The name of the element.
+     * @param array|null $data (optional) Array of data.
+     * @return void
      */
-    public static function element(string $element, array $data = [])
+    public static function add(string $element, ?array $data = []): void
     {
-        require ROOT . "/templates/elements/{$element}.php";
+        require ELEMENTS . DIRECTORY_SEPARATOR . "{$element}.php";
     }
 }

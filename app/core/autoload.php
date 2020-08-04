@@ -1,12 +1,22 @@
 <?php
+/**
+ * |--------------------------------------------------------------------------
+ * | Custom autoload function
+ * |--------------------------------------------------------------------------
+ * | Used to autoload classes from AUTOLOAD_CLASSES constant.
+ * @param string $class
+ * @return void
+ */
+function loader(string $class): void
+{
+    // reversing the class name twice due to namespaces in order to get the actual class name without namespace
+    $class = strrev(explode('\\', strrev($class))[0]);
+    foreach (AUTOLOAD_CLASSES as $path) {
+        $class_file = $path . DIRECTORY_SEPARATOR . $class . '.php';
+        if (file_exists($class_file)) {
+            require_once $class_file;
+        }
+    }
+}
 
-require_once ROOT . '/config/config.php';
-require_once ROOT . '/config/Connection.php';
-require_once ROOT . '/controller/Controller.php';
-require_once ROOT . '/model/Model.php';
-require_once ROOT . '/model/Role.php';
-require_once ROOT . '/model/User.php';
-require_once ROOT . '/helpers/Request.php';
-require_once ROOT . '/helpers/Logger.php';
-require_once ROOT . '/helpers/Validator.php';
-require_once ROOT . '/helpers/Elements.php';
+spl_autoload_register('loader');

@@ -14,7 +14,7 @@ use App\Helper\Elements;
             </div>
         </div>
         <div class="post__login__form">
-            <?php Elements::element('login'); ?>
+            <?php Elements::add('login'); ?>
         </div>
     </div>
     <?php else : ?>

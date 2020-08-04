@@ -10,8 +10,8 @@ use App\Model\Role;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $data['title']; ?></title>
-    <link type="text/css" rel="stylesheet" href="<?= HOST; ?>../assets/css/main.css" />
-    <link rel="icon" type="image/x-icon" href="<?= HOST; ?>../assets/images/logo.svg">
+    <link type="text/css" rel="stylesheet" href="<?= HOST; ?>assets/css/main.css" />
+    <link rel="icon" type="image/x-icon" href="<?= HOST; ?>assets/images/logo.svg">
 </head>
 <body>
 <nav class="navigation">
@@ -40,7 +40,7 @@ use App\Model\Role;
                     <ul class="navigation__user__content dropdown__content">
                         <li class="dropdown__item">
 	                        <a href="/account/reading-list">
-		                        Reading list[<?= $data['user']['reading_list_count'] ? $data['user']['reading_list_count'] : 0; ?>]
+		                        Reading list[<?= isset($data['user']['reading_list_count']) ? $data['user']['reading_list_count'] : 0; ?>]
 	                        </a>
                         </li>
                         <li class="dropdown__item"><a href="/account/dashboard">Dashboard</a></li>
@@ -62,7 +62,7 @@ use App\Model\Role;
                         Login
                     </button>
                     <div class="navigation__login__content dropdown__content">
-                        <?php Elements::element('login'); ?>
+                        <?php Elements::add('login'); ?>
                     </div>
                 </div>
                 <?php endif; ?>

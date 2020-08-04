@@ -24,6 +24,6 @@ use App\Helper\Elements;
                 }
             }
         }
-        Elements::element('post', $post);
+        Elements::add('post', $post);
     } ?>
 </section>

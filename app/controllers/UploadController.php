@@ -1,20 +1,23 @@
 <?php
-
 namespace App\Controller;
-use Exception;
 
+use Exception;
 /**
- * |--------------------------------------------------------------------------
- * | Uploads controller
- * |--------------------------------------------------------------------------
- * |
- * | This will serve as the uploads controller.
- * |
+ * This will serve as the uploads controller.
  */
 class UploadController extends Controller
 {
+    private $directory = UPLOADS;
 
-    private $directory = ROOT . '/../public/assets/uploads/';
+    public function __construct()
+    {
+
+    }
+
+    private function checkLeftOvers()
+    {
+
+    }
 
     /**
      * @todo improve validation/check file type severly
@@ -44,7 +47,7 @@ class UploadController extends Controller
                     if ($fileError === 0) {
                         if ($fileSize <= 20971520) {
                             $fileNewName = uniqid() . '.' . $fileExtension;
-                            $destination = $this->directory . $fileNewName;
+                            $destination = $this->directory . DIRECTORY_SEPARATOR . $fileNewName;
                             if (move_uploaded_file($fileTmp, $destination)) {
                                 $response['result'] = true;
                                 $response['message'] = 'Cover image successfully uploaded';
@@ -80,7 +83,7 @@ class UploadController extends Controller
         if ($this->request->is('POST')) {
             $response['result'] = false;
             $fileToDelete = $this->request->data();
-            if (!unlink($this->directory . $fileToDelete)) {
+            if (!unlink($this->directory . DIRECTORY_SEPARATOR . $fileToDelete)) {
                 $response['message'] = "$fileToDelete cannot be deleted due to an error";
             }
             else {
