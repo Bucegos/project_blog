@@ -24,7 +24,6 @@ class HomeController extends Controller
         /** @var Post $Post */
         $Post = $this->model('Post');
         $posts = $Post->getPostsWithUserAndTags();
-//        var_dump($posts); die;
         $this->render('home/index', [
             'title' => 'Home',
             'posts' => $posts,

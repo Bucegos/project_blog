@@ -98,14 +98,38 @@ class Post extends Model
             $query = $this->pdo->query($sql);
             $posts = $query->fetchAll();
             foreach ($posts as &$post) {
+                $post['tags'] = json_decode($post['tags']);
+                $post['likedBy'] = json_decode($post['likedBy']);
+                $post['readers'] = json_decode($post['readers']);
+                foreach ($post['tags'] as $tag) {
+                    if ($tag !== null) {
+                        $post['tags'][] = $tag;
+                    } else {
+                        $post['tags'] = null;
+                    }
+                }
+                foreach ($post['likedBy'] as $like) {
+                    if ($like !== null) {
+                        $post['likedBy'][] = $like;
+                    } else {
+                        $post['likedBy'] = null;
+                    }
+                }
+                foreach ($post['readers'] as $reader) {
+                    if ($reader !== null) {
+                        $post['readers'][] = $reader;
+                    } else {
+                        $post['readers'] = null;
+                    }
+                }
                 if (!empty($post['tags'])) {
-                    $post['tags'] = array_unique(json_decode($post['tags']));
+                    $post['tags'] = array_unique($post['tags']);
                 }
                 if (!empty($post['likedBy'])) {
-                    $post['likedBy'] = array_unique(json_decode($post['likedBy']));
+                    $post['likedBy'] = array_unique($post['likedBy']);
                 }
                 if (!empty($post['readers'])) {
-                    $post['readers'] = array_unique(json_decode($post['readers']));
+                    $post['readers'] = array_unique($post['readers']);
                 }
             }
             return $posts;

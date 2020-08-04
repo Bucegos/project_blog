@@ -32,11 +32,13 @@
         </div>
         <div class="post__footer">
             <div class="post__tags">
-                <?php foreach($data['tags'] as $tag) : ?>
-                    <a class="tag" href="/tags/<?= $tag; ?>">
-                        <span>#</span><?= $tag; ?>
-                    </a>
-                <?php endforeach; ?>
+                <?php if (!empty($data['tags'])) :
+                    foreach($data['tags'] as $tag) : ?>
+                        <a class="tag" href="/tags/<?= $tag; ?>">
+                            <span>#</span><?= $tag; ?>
+                        </a>
+                <?php endforeach;
+                endif; ?>
             </div>
             <button class="button button--reading-list <?= $data['onReadListForCurrentUser'] ? 'saved' : null; ?>"
                  type="button"
