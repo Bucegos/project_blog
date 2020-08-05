@@ -4,8 +4,8 @@
         <div class="post__image"
              style="background-image: url(<?= ASSETS_UPLOADS . "{$data['cover']}" ;?>)"
         ></div>
-        <?php endif; ?>
     </a>
+    <?php endif; ?>
     <div class="post__content">
         <div class="post__header">
             <div class="profile-image">
@@ -18,7 +18,7 @@
                     <?= $data['username']; ?>
                 </a>
                 <p class="muted">
-                    <?= date("h:i - M, jS 'y", strtotime($data['created_at'])); ?>
+                    <?= date("M jS, Y", strtotime($data['created_at'])); ?>
                 </p>
             </div>
             <button class="button--like <?= $data['likedByCurrentUser'] ? 'animated' : null; ?>"

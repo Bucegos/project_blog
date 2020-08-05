@@ -3,14 +3,14 @@
 use App\Helper\Elements;
 
 ?>
-<section class="home container">
+<section class="container">
     <h1>Articles</h1>
     <?php foreach ($data['articles'] as $article) {
         $article['likedByCurrentUser'] = false;
         $article['onReadListForCurrentUser'] = false;
         if (isset($_SESSION['user'])) {
-            if (!empty($article['savedBy'])) {
-                foreach ($article['savedBy'] as $user) {
+            if (!empty($article['bookmarkedBy'])) {
+                foreach ($article['bookmarkedBy'] as $user) {
                     if ($user === (int)$_SESSION['user']['id']) {
                         $article['onReadListForCurrentUser'] = true;
                     }

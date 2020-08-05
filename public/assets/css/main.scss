@@ -19,7 +19,7 @@ $grayish: #333940;
 $text: #B2B6BB;
 $blue: #528BFF;
 $green: #1abb9c;
-$orange: #FF8121; 
+$orange: #FF8121;
 $purple: #7B78FF;
 $borderGray: #303840;
 $boxShadow: 0 4px 8px rgba(0,0,0,0.38);
@@ -196,7 +196,7 @@ p, h1, h2, h3, h4, h5 {
   margin: 0;
   font: {
     weight: bold;
-  } 
+  }
 }
 
 p {
@@ -306,7 +306,7 @@ ul {
       border-left: unset;
       &:hover {
         background-color: unset;
-        border-bottom: 3px solid $purple; 
+        border-bottom: 3px solid $purple;
         padding: 7px 17px;
         box-shadow: none;
       }
@@ -401,14 +401,6 @@ a {
   }
 }
 
-.title {
-  display: inline-block;
-  border-bottom: 0.25rem solid $blue;
-  border-radius: 0.1rem;
-  padding: 0 0.2rem;
-  margin: 0 0 1.5rem;
-}
-
 .muted {
   font: {
     family: "Roboto", sans-serif;
@@ -460,26 +452,19 @@ a {
 .navigation {
   display: flex;
   align-items: center;
+  padding: 0.5rem 5rem;
   background-color: $backgroundColor;
-  padding: 0.5rem 2rem;
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
   &__menu {
     display: flex;
     align-items: center;
     list-style: none;
     margin-left: auto;
-  }
-  &__item:first-child {
-    margin-right: 1rem;
-  }
-  &__user {
-    &__logout {
-      text-align: center;
+    li:first-child {
+      margin-right: 1rem;
     }
-  }
-  &__login {
-    &__buttons {
-      display: flex;
-      justify-content: space-around;
+    li + li ul li:last-child {
+      text-align: center;
     }
   }
 }
@@ -524,7 +509,7 @@ a {
   left: 2rem;
   padding: 1rem;
   border-radius: 0.25rem;
-  box-shadow: 0 0 12px 0 rgba(0,0,0,0.1), 0 10px 30px 0 rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.75);
   &--show {
     top: 85%;
     opacity: 1;

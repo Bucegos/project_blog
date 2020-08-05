@@ -10,6 +10,7 @@ use Exception;
 class AuthController extends Controller
 {
     /**
+     * TODO: Go for full frontend -> UI.JS will handle all the modifications.
      * Login method.
      * @throws Exception
      * @return void

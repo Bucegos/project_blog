@@ -121,7 +121,7 @@ class User extends Model
      */
     public function getReadinglistCount(int $userId)
     {
-        $sql = "SELECT COUNT(*) FROM `article_saves` WHERE `article_saves`.saved_by = :userId";
+        $sql = "SELECT COUNT(*) FROM `article_bookmarks` WHERE `article_bookmarks`.bookmarked_by = :userId";
         try {
             $query = $this->pdo->prepare($sql);
             $query->execute([

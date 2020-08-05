@@ -69,15 +69,15 @@ class Article extends Model
             count(DISTINCT `article_likes`.liked_by) as likes, 
             JSON_ARRAYAGG(`article_likes`.liked_by) AS likedBy,
             JSON_ARRAYAGG(`tag`.name) AS tags,
-            JSON_ARRAYAGG(`article_saves`.saved_by) AS savedBy,
+            JSON_ARRAYAGG(`article_bookmarks`.bookmarked_by) AS bookmarkedBy,
             `user`.username, `user`.image
         FROM `article`
         LEFT JOIN `article_likes` 
             ON `article`.id = `article_likes`.article_id
         LEFT JOIN `article_tags` 
             ON `article`.id = `article_tags`.article_id
-        LEFT JOIN `article_saves` 
-            ON `article`.id = `article_saves`.article_id
+        LEFT JOIN `article_bookmarks` 
+            ON `article`.id = `article_bookmarks`.article_id
         LEFT JOIN `tag` 
             ON `article_tags`.tag_id = `tag`.id
         LEFT JOIN `user` 
@@ -94,7 +94,7 @@ class Article extends Model
             foreach ($articles as &$article) {
                 $article['tags'] = json_decode($article['tags']);
                 $article['likedBy'] = json_decode($article['likedBy']);
-                $article['savedBy'] = json_decode($article['savedBy']);
+                $article['bookmarkedBy'] = json_decode($article['bookmarkedBy']);
                 foreach ($article['tags'] as $tag) {
                     if ($tag !== null) {
                         $article['tags'][] = $tag;
@@ -109,11 +109,11 @@ class Article extends Model
                         $article['likedBy'] = null;
                     }
                 }
-                foreach ($article['savedBy'] as $save) {
-                    if ($save !== null) {
-                        $article['savedBy'][] = $save;
+                foreach ($article['bookmarkedBy'] as $bookmark) {
+                    if ($bookmark !== null) {
+                        $article['bookmarkedBy'][] = $bookmark;
                     } else {
-                        $article['savedBy'] = null;
+                        $article['bookmarkedBy'] = null;
                     }
                 }
                 if (!empty($article['tags'])) {
@@ -122,8 +122,8 @@ class Article extends Model
                 if (!empty($article['likedBy'])) {
                     $article['likedBy'] = array_unique($article['likedBy']);
                 }
-                if (!empty($article['saves'])) {
-                    $article['savedBy'] = array_unique($article['savedBy']);
+                if (!empty($article['bookmarks'])) {
+                    $article['bookmarkedBy'] = array_unique($article['bookmarkedBy']);
                 }
             }
             return $articles;

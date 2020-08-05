@@ -94,8 +94,8 @@ export default class Actions {
         item.addEventListener('click', () => {
             let data = {
                 post: item.dataset.postId,
-                table: 'readers',
-                column: 'user_id',
+                table: 'bookmarks',
+                column: 'bookmarked_by',
             }
             if (item.classList.contains('saved')) {
                 this.Utils.fetchJsonData(ROUTES.USER_REMOVE, data)

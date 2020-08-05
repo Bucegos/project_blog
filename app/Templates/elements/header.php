@@ -1,8 +1,6 @@
 <?php
 use App\Helper\Elements;
-use App\Model\Role;
 use App\Model\User;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +8,8 @@ use App\Model\User;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $data['title']; ?></title>
-    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'main.css'; ?>" />
+    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'main.min.css'; ?>" />
+    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'login.min.css'; ?>" />
     <?php if (isset($customCss)) :
         foreach($customCss as $file) : ?>
         <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . "$file"; ?>" />
@@ -30,19 +29,19 @@ use App\Model\User;
 <!--        <button class="btn btn-success" type="submit">Search</button>-->
 <!--    </form>-->
     <ul class="navigation__menu">
-        <li class="navigation__item">
+        <li>
             <button class="button button--gradient" onclick="location.href='/articles/write'" type="button">
                 Write an artile
             </button>
         </li>
-        <li class="navigation__item">
+        <li>
             <div class="dropdown">
                 <?php if (isset($data['user'])) : ?>
-                <div class="navigation__user">
+                <div>
                     <button class="dropdown__toggler profile-image" role="button">
                         <img src="<?= ASSETS_UPLOADS . "{$data['user']['image']}"; ?>" alt="profile" />
                     </button>
-                    <ul class="navigation__user__content dropdown__content">
+                    <ul class="dropdown__content">
                         <li class="dropdown__item">
                             <a href="/account/reading-list">
                                 Reading list[<?= isset($data['user']['reading_list_count']) ? $data['user']['reading_list_count'] : 0; ?>]
@@ -52,9 +51,9 @@ use App\Model\User;
                         <li class="dropdown__item"><a href="/account/drafts">Drafs[0]</a></li>
                         <li class="dropdown__item"><a href="/account/settings">Account Settings</a></li>
                         <?php if ($data['user']['role'] === User::ADMIN) : ?>
-                        <li class="dropdown__item navigation__user__admin"><a href="/admin">Admin</a></li>
+                            <li class="dropdown__item navigation__user__admin"><a href="/admin">Admin</a></li>
                         <?php endif; ?>
-                        <li class="navigation__user__logout">
+                        <li>
                             <button class="button button--secondary" onclick="location.href='/auth/logout'" type="button">
                                 Logout
                             </button>
@@ -62,11 +61,11 @@ use App\Model\User;
                     </ul>
                 </div>
                 <?php else : ?>
-                <div class="navigation__login">
+                <div>
                     <button class="button dropdown__toggler" role="button">
                         Login
                     </button>
-                    <div class="navigation__login__content dropdown__content">
+                    <div class="dropdown__content">
                         <?php Elements::add('login'); ?>
                     </div>
                 </div>
