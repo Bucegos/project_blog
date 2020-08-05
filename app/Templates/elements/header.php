@@ -8,8 +8,9 @@ use App\Model\User;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $data['title']; ?></title>
-    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'main.min.css'; ?>" />
-    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'login.min.css'; ?>" />
+    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'main.css'; ?>" />
+    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'login.css'; ?>" />
+    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'articles.css'; ?>" />
     <?php if (isset($customCss)) :
         foreach($customCss as $file) : ?>
         <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . "$file"; ?>" />
@@ -31,7 +32,7 @@ use App\Model\User;
     <ul class="navigation__menu">
         <li>
             <button class="button button--gradient" onclick="location.href='/articles/write'" type="button">
-                Write an artile
+                Write an article
             </button>
         </li>
         <li>

@@ -73,9 +73,17 @@ class ArticlesController extends Controller
      */
     public function read(string $slug): void
     {
+        /** @var Article $Article */
         $Article = $this->model('article');
-        $article = $Article->findBy('article', 'slug', $slug);
-        $this->render('article' , 'read', [
+        $article = $Article->getArticlesFull($slug);
+        // 'getArticlesFull' method was built to retrieve all articles in case there's no
+        // condition applied, but in this case we expect only one, based on slug, so if
+        // the query was successfull, we'll only send that to the view due to how we built
+        // the 'article' element.
+        if ($article !== false) {
+            $article = $article[0];
+        }
+        $this->render('articles' , 'read', [
             'title' => $article['title'],
             'article' => $article,
         ]);

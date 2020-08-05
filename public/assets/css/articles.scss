@@ -1,0 +1,169 @@
+/*
+|--------------------------------------------------------------------------
+| Main scss variables
+|--------------------------------------------------------------------------
+|
+| When importing main, the underscore is left out to prevents the SCSS
+| compiler from generating a CSS file from it, so that's why this was named
+| '_main'.
+|
+| Mentions:
+|   - Here will be added all the variables used throughout the project and
+|   any sass functions.
+|
+*/
+
+$dark: #1d2126;
+$backgroundColor: #292e33;
+$grayish: #333940;
+$text: #B2B6BB;
+$blue: #528BFF;
+$green: #1abb9c;
+$orange: #FF8121;
+$purple: #7B78FF;
+$borderGray: #303840;
+$boxShadow: 0 4px 8px rgba(0,0,0,0.38);
+$navShadow: 16px 4px 12px -14px rgba(0,0,0,0.75);
+$borderRadius: .25rem;
+
+/* Articles */
+
+.article {
+  /* Everything related to the article element itself(mini or not) */
+  background-color: $backgroundColor;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  border: 2px solid $borderGray;
+  box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.75);
+  &__info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    .profile-image {
+      margin-right: 0.5rem;
+    }
+  }
+  &__container {
+    padding: 1rem;
+  }
+  &__cover {
+    width: 100%;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom: 2px solid $borderGray;
+    &--mini {
+      height: 300px;
+    }
+  }
+  &__title {
+    margin-bottom: 1rem;
+    font: {
+      size: 2.5rem;
+    }
+    &--mini {
+      font: {
+        size: 1.5rem;
+      }
+    }
+  }
+  &__misc {
+    display: flex;
+    align-items: center;
+    button {
+      align-self: flex-end;
+    }
+  }
+  &__tags {
+    margin-bottom: 1rem;
+  }
+  &__input {
+    width: 100%;
+    background-color: unset;
+    border: none;
+    margin: 2rem 0;
+    line-height: 2rem;
+    font: {
+      family: "Nunito", sans-serif;
+      weight: bold;
+    }
+    color: $text;
+    &::placeholder {
+      font: {
+        size: 2rem;
+      }
+      color: $text;
+    }
+    &--title {
+      color: #fff;
+      font: {
+        size: 2rem;
+      }
+    }
+    &--content {
+      font: {
+        size: 1rem;
+      }
+    }
+  }
+  /* Write page */
+  &-write {
+    &__edit, &__preview {
+      background-color: $backgroundColor;
+      padding: 2rem;
+      border-radius: 0.25rem;
+      box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.75);
+    }
+    &__actions {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    &__cover {
+      display: flex;
+      align-items: center;
+      input {
+        display: none;
+      }
+      &--mini-preview {
+        width: 200px;
+        height: 150px;
+        margin-right: 3rem;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      &__buttons {
+        text-align: center;
+        button {
+          display: block;
+          width: 100%;
+          margin: 1rem 0;
+        }
+      }
+    }
+    &__login {
+      background-color: $backgroundColor;
+      border-radius: 0.25rem;
+      padding: 2rem;
+      &__message {
+        text-align: center;
+        margin-bottom: 3rem;
+        img {
+          margin-bottom: 3rem;
+          width: 50%;
+        }
+        div h1 {
+          margin-bottom: 1rem;
+        }
+      }
+      &__form {
+        max-width: 50%;
+        margin: 0 auto;
+        padding-bottom: 3rem;
+      }
+    }
+  }
+}

@@ -24,6 +24,7 @@ use App\Helper\Elements;
                 }
             }
         }
+        $article['mini'] = true;
         Elements::add('article', $article);
     } ?>
 </section>
