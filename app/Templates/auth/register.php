@@ -1,6 +1,6 @@
 <section class="register container">
     <div class="register__message">
-        <img src="<?= HOST . 'assets/images/logo.svg'; ?>" alt="logo" />
+        <img src="<?= ASSETS_IMG . 'logo.svg'; ?>" alt="logo" />
         <div>
             <h1>Welcome to "BLOG"</h1>
             <p>Please register your account to have access to awesome content!😎</p>

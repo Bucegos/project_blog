@@ -1,6 +1,12 @@
 <?php
 // The server/domain name
 define('HOST', 'http://blog.local/');
+// Assets paths used in frontend
+define('ASSETS_CSS', HOST . '/assets/css/');
+define('ASSETS_JS', HOST . '/assets/js/');
+define('ASSETS_IMG', HOST . '/assets/images/');
+define('ASSETS_FONT', HOST . '/assets/css/');
+define('ASSETS_UPLOADS', HOST . '/assets/uploads/');
 // Database info
 define('DATABASE_SERVERNAME', 'localhost');
 define('DATABASE_USERNAME', 'root');
@@ -10,7 +16,7 @@ define('DATABASE_NAME', 'blog');
 define('APP_ROOT', dirname(__DIR__, 1));
 // Public directory path
 define('APP_PUBLIC', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'public');
-// Assets paths
+// Assets paths used in backend
 define('ASSETS', APP_PUBLIC . DIRECTORY_SEPARATOR . 'assets');
 define('UPLOADS', ASSETS . DIRECTORY_SEPARATOR . 'uploads');
 // Default controller and method

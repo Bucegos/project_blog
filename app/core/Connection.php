@@ -5,10 +5,7 @@ use Exception;
 use PDO;
 use PDOException;
 /**
-* |--------------------------------------------------------------------------
-* | Connection class
-* |--------------------------------------------------------------------------
-* | Used to connect to the database.
+* Used to connect to the database.
  */
 class Connection
 {

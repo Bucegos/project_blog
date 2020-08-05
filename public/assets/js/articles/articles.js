@@ -1,10 +1,10 @@
 import ROUTES from '../components/routes.js'
 /**
  |--------------------------------------------------------------------------
- | Posts class
+ | Articles class
  |--------------------------------------------------------------------------
  |
- | This class will deal with all 'posts' related stuff.
+ | This class will deal with all 'articles' related stuff.
  | OBSERVATIONS REGARDING prepareUpload and removeImage!!! :
  |     Resetting lastImage and imageInput so the user can
  |   select the same image they previously uploaded(just in case)
@@ -17,7 +17,7 @@ import ROUTES from '../components/routes.js'
  | still be able to keep track of things even in case of a refresh.
  |
  */
-export default class Posts {
+export default class Articles {
 
     #hasUploaded = false
     #lastImage = null

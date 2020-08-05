@@ -2,7 +2,7 @@ import Notification from './components/notification.js'
 import Loading from './components/loading.js'
 import Dropdown from './components/dropdown.js'
 import Auth from './auth/auth.js'
-import Posts from './posts/posts.js'
+import Articles from './articles/articles.js'
 import Actions from './components/actions.js'
 import Utils from './components/utils.js';
 
@@ -22,7 +22,7 @@ class App {
         this.Notification = new Notification
         this.Utils = new Utils
         new Auth(this.Loading)
-        new Posts(this.Loading, this.Notification)
+        new Articles(this.Loading, this.Notification)
         new Dropdown
         new Actions(this.Utils, this.Notification)
     }

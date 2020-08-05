@@ -1,17 +1,10 @@
 <?php
-
 namespace App\Controller;
 
 use App\Model\User;
 use Exception;
-
 /**
- * |--------------------------------------------------------------------------
- * | Users controller
- * |--------------------------------------------------------------------------
- * |
- * | This will serve as the users controller.
- * |
+ * This will serve as the users controller.
  * @property User $User
  */
 class UsersController extends Controller
@@ -20,12 +13,12 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->currentLoggedUser = $_SESSION['user']['id'];
+        $this->currentLoggedUser = $this->getUserId();
         parent::__construct();
     }
 
     /**
-     * Method used to like posts.
+     * Method used to like articles.
      * @throws Exception
      * return void
      */
@@ -41,7 +34,7 @@ class UsersController extends Controller
                 /** @var User $User */
                 $User = $this->model('user');
                 if (isset($_SESSION['user'])) {
-                    $liked = $User->add($data['post'], $this->currentLoggedUser, "post_$table", $column);
+                    $liked = $User->add($data['post'], $this->currentLoggedUser, "article_$table", $column);
                     if ($liked !== false) {
                         $response['result'] = true;
                         $response['message'] = 'Success!';
@@ -49,7 +42,7 @@ class UsersController extends Controller
                         $response['message'] = 'An error occured, please try again.';
                     }
                 } else {
-                    $response['message'] = 'Please login to be able to like posts.';
+                    $response['message'] = 'Please login to be able to like articles.';
                 }
             } else {
                 $response['message'] = 'Please enter valid data.';
@@ -61,7 +54,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Method used to unlike posts.
+     * Method used to unlike articles.
      * @throws Exception
      * return void
      */
@@ -76,7 +69,7 @@ class UsersController extends Controller
                 $column = $data['column'];
                 /** @var User $User */
                 $User = $this->model('user');
-                $unliked = $User->remove($data['post'], $this->currentLoggedUser, "post_$table", $column);
+                $unliked = $User->remove($data['post'], $this->currentLoggedUser, "article_$table", $column);
                 if ($unliked !== false) {
                     $response['result'] = true;
                     $response['message'] = 'Success!';

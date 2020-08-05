@@ -1,8 +1,8 @@
 <div class="post__container">
     <?php if (!empty($data['cover'])) : ?>
-    <a href="<?="/posts/read/{$data['slug']}";?>">
+    <a href="<?="/articles/read/{$data['slug']}";?>">
         <div class="post__image"
-             style="background-image: url(<?= HOST . "assets/uploads/{$data['cover']}" ;?>)"
+             style="background-image: url(<?= ASSETS_UPLOADS . "{$data['cover']}" ;?>)"
         ></div>
         <?php endif; ?>
     </a>
@@ -10,7 +10,7 @@
         <div class="post__header">
             <div class="profile-image">
                 <a href="/users/<?= $data['username']; ?>">
-                    <img src="<?= HOST . "assets/uploads/{$data['image']}"; ?>" alt="profile" />
+                    <img src="<?= ASSETS_UPLOADS . "{$data['image']}"; ?>" alt="profile" />
                 </a>
             </div>
             <div>
@@ -28,7 +28,7 @@
             </button>
         </div>
         <div class="post__title">
-            <a href="<?="/posts/read/{$data['slug']}";?>"><?= $data['title']; ?></a>
+            <a href="<?="/articles/read/{$data['slug']}";?>"><?= $data['title']; ?></a>
         </div>
         <div class="post__footer">
             <div class="post__tags">

@@ -37,12 +37,9 @@ class UploadController extends Controller
                 $fileSize = $file['size'];
                 $fileTmp = $file['tmp_name'];
                 $fileError = $file['error'];
-
                 $fileExtension = explode('.', $fileName);
                 $fileExtension = strtolower(end($fileExtension));
-
                 $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-
                 if (in_array($fileExtension, $allowedExtensions)) {
                     if ($fileError === 0) {
                         if ($fileSize <= 20971520) {
@@ -74,7 +71,7 @@ class UploadController extends Controller
     }
 
     /**
-     * @todo REALLY HAVE TO IMPROVE THIS!!!
+     * @todo REALLY HAVE TO IMPROVE THIS!!! => checkLeftOvers
      * @return void
      * @throws Exception
      */

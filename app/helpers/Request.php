@@ -2,18 +2,13 @@
 
 namespace App\Helper;
 /**
-|--------------------------------------------------------------------------
-| Request class
-|--------------------------------------------------------------------------
-|
-| Class used to get and process request info.
-|
+ * Class used to get and process request info.
  */
 class Request
 {
     /**
      * Used to check the request type.
-     * @param string $type
+     * @param string $type The given request type.
      * @return bool
      */
     public function is(string $type): bool
@@ -46,10 +41,10 @@ class Request
     }
 
     /**
-     * Parsing all the data that is being sent as JSON. `json_decode`
-     * turns our JSON-object into a PHP Associative arra.
+     * Parsing all the data that is being sent as JSON. `json_decode` turns our JSON-object
+     * into a PHP Associative arra.
      * IF $data === null, then there's no need for JSON data and the
-     * server needs to handle the request so $data falls back to $_POST.
+     * server needs to handle the request so $data falls back whatever is in $_GET or $_POST.
      * @param string|null $value
      * @return array|string
      */
@@ -57,7 +52,11 @@ class Request
     {
         $data = json_decode(file_get_contents('php://input'), true);
         if ($data === null) {
-            $data = $_POST;
+            if ($_POST) {
+                $data = $_POST;
+            } else if ($_GET) {
+                $data = $_GET;
+            }
         }
         if (!empty($value)) {
             return $data[$value];

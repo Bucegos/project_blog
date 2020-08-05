@@ -2,12 +2,7 @@
 
 namespace App\Helper;
 /**
-|--------------------------------------------------------------------------
-| Main validator
-|--------------------------------------------------------------------------
-|
-| Used in all models for common validate rules.
-|
+ * Used in all models for common validate rules.
  */
 class Validator
 {

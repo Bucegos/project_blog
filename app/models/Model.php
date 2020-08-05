@@ -8,17 +8,10 @@ use App\Helper\Validator;
 use PDOException;
 
 /**
-|--------------------------------------------------------------------------
-| Main app model
-|--------------------------------------------------------------------------
-|
-| Every model "subclass" will extend this main model class which will
-| contain every useful/reusable method on all models.
-|
+ * Main app model.
  */
 class Model
 {
-
     protected $pdo;
     public $validator;
 

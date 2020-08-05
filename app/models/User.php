@@ -1,24 +1,22 @@
 <?php
-
 namespace App\Model;
 
 use App\Helper\Logger;
 use PDOException;
-
 /**
- * |--------------------------------------------------------------------------
-* | User model
-* |--------------------------------------------------------------------------
-* |
+ * User model.
  */
 class User extends Model
 {
+    public CONST ADMIN = 'Admin';
+    public CONST AUTHOR = 'Author';
+    public CONST User = 'User';
 
     /**
-     * @param string $username
-     * @param string $email
-     * @param string $password
-     * @return array|false
+     * @param string $username The given username.
+     * @param string $email    The given email.
+     * @param string $password The hashed password.
+     * @return array|false     Return the new created user or false if the creation failed.
      */
     public function new(string $username, string $email, string $password)
     {
@@ -44,74 +42,74 @@ class User extends Model
     }
 
     /**
-     * Method used to add a like for a post.
-     * @param int $postId    Post id.
+     * Method used to add a like for a article.
+     * @param int $articleId Article id.
      * @param int $userId    User id.
      * @param string $table  The name of the table.
      * @param string $column The name of the column.
      * @return array|false
      */
-    public function add(int $postId, int $userId, string $table, string $column)
+    public function add(int $articleId, int $userId, string $table, string $column)
     {
         $sql = "INSERT INTO
-            $table(post_id, $column)
-            VALUES (:post_id, :$column)
+            $table(article_id, $column)
+            VALUES (:article_id, :$column)
         ";
         try {
             $query = $this->pdo->prepare($sql);
             return $query->execute([
-                ':post_id' => $postId,
+                ':article_id' => $articleId,
                 ":$column" => $userId,
             ]);
         } catch (PDOException $e) {
-            Logger::logError($e->getMessage(), "post_likes_{$postId}_{$userId}");
+            Logger::logError($e->getMessage(), "article_likes_{$articleId}_{$userId}");
             return false;
         }
     }
 
     /**
-     * Method used to remove a like from a post.
-     * @param int $postId Post id.
-     * @param int $userId User id.
+     * Method used to remove a like from an article.
+     * @param int $articleId Article id.
+     * @param int $userId    User id.
      * @param string $table  The name of the table.
      * @param string $column The name of the column.
      * @return array|false
      */
-    public function remove(int $postId, int $userId, string $table, string $column)
+    public function remove(int $articleId, int $userId, string $table, string $column)
     {
-        $sql = "DELETE FROM $table WHERE $table.post_id = :post_id AND $table.$column = :$column";
+        $sql = "DELETE FROM $table WHERE $table.article_id = :article_id AND $table.$column = :$column";
         try {
             $query = $this->pdo->prepare($sql);
             return $query->execute([
-                ':post_id' => $postId,
+                ':article_id' => $articleId,
                 ":$column" => $userId,
             ]);
         } catch (PDOException $e) {
-            Logger::logError($e->getMessage(), "post_unlikes_{$postId}_{$userId}");
+            Logger::logError($e->getMessage(), "article_unlikes_{$articleId}_{$userId}");
             return false;
         }
     }
 
     /**
-     * Method used to remove a like from a post.
-     * @param int $postId Post id.
-     * @param int $userId User id.
+     * Method used to remove a like from an article.
+     * @param int $articleId Article id.
+     * @param int $userId    User id.
      * @param string $table  The name of the table.
      * @param string $column The name of the column.
      * @return array|false
      */
-    public function getReadingList(int $postId, int $userId, string $table, string $column)
+    public function getReadingList(int $articleId, int $userId, string $table, string $column)
     {
         // TODO: modify -> will use in /users/reading-list
-        $sql = "DELETE FROM $table WHERE $table.post_id = :post_id AND $table.$column = :$column";
+        $sql = "DELETE FROM $table WHERE $table.article_id = :article_id AND $table.$column = :$column";
         try {
             $query = $this->pdo->prepare($sql);
             return $query->execute([
-                ':post_id' => $postId,
+                ':article_id' => $articleId,
                 ":$column" => $userId,
             ]);
         } catch (PDOException $e) {
-            Logger::logError($e->getMessage(), "post_unlikes_{$postId}_{$userId}");
+            Logger::logError($e->getMessage(), "article_unlikes_{$articleId}_{$userId}");
             return false;
         }
     }
@@ -123,7 +121,7 @@ class User extends Model
      */
     public function getReadinglistCount(int $userId)
     {
-        $sql = "SELECT COUNT(*) FROM `post_readers` WHERE `post_readers`.user_id = :userId";
+        $sql = "SELECT COUNT(*) FROM `article_saves` WHERE `article_saves`.saved_by = :userId";
         try {
             $query = $this->pdo->prepare($sql);
             $query->execute([
@@ -132,6 +130,48 @@ class User extends Model
             return $query->fetchColumn();
         } catch (PDOException $e) {
             Logger::logError($e->getMessage(), "getReadinglistCount");
+            return false;
+        }
+    }
+
+    /**
+     * Verifies whether the user has role admin or not.
+     * @param int $userId The given user id.
+     * @return bool       True if the user is admin, false otherwise.
+     */
+    public function isAdmin(int $userId): bool
+    {
+        $sql = "SELECT COUNT(*) FROM `user` WHERE `user`.id = :userId AND `user`.role = :role";
+        try {
+            $query = $this->pdo->prepare($sql);
+            $query->execute([
+                ':userId' => $userId,
+                ':role' => self::ADMIN,
+            ]);
+            return $query->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            Logger::logError($e->getMessage(), "isAdmin");
+            return false;
+        }
+    }
+
+    /**
+     * Verifies whether the user has role author or not.
+     * @param int $userId The given user id.
+     * @return bool       True if the user is author, false otherwise.
+     */
+    public function isAuthor(int $userId): bool
+    {
+        $sql = "SELECT COUNT(*) FROM `user` WHERE `user`.id = :userId AND `user`.role = :role";
+        try {
+            $query = $this->pdo->prepare($sql);
+            $query->execute([
+                ':userId' => $userId,
+                ':role' => self::AUTHOR,
+            ]);
+            return $query->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            Logger::logError($e->getMessage(), "isAdmin");
             return false;
         }
     }

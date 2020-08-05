@@ -1,17 +1,19 @@
 <?php
 namespace App\Controller;
 
-use App\Model\Post;
+use App\Model\Article;
 use App\Model\Tag;
+use App\Model\User;
 /**
-* This will serve as the posts controller.
- * @property Post $Post
+* This will serve as the articles controller.
+ * @property Article $Article
  * @property Tag $Tag
+ * @property User $User
  */
-class PostsController extends Controller
+class ArticlesController extends Controller
 {
     /**
-     * Used to create new posts.
+     * Create a new article.
      * @return void
      */
     public function write(): void
@@ -21,12 +23,15 @@ class PostsController extends Controller
             $response['result'] = false;
             if (!empty($this->request->data())) {
                 $data = $this->request->data();
-                $data['author_id'] = $_SESSION['user']['id'];
+                $userId = $this->getUserId();
+                $data['author_id'] = $userId;
                 $slug = $this->slugify($data['title']);
-                /** @var Post $Post */
-                $Post = $this->model('post');
-                $data['status'] = $this->isAdminOrAuthor() ? 'approved' : 'created';
-                $post = $Post->new(
+                /** @var Article $Article */
+                $Article = $this->model('article');
+                /** @var User $User */
+                $User = $this->model('user');
+                $data['status'] = $User->isAdmin($userId) || $User->isAuthor($userId) ? 'approved' : 'created';
+                $article = $Article->new(
                     $data['author_id'],
                     $data['title'],
                     $slug,
@@ -35,9 +40,9 @@ class PostsController extends Controller
                     $data['status'],
                     $data['content']
                 );
-                if ($post !== false) {
+                if ($article !== false) {
                     $response['result'] = true;
-                    $response['message'] = 'Post successfully created.';
+                    $response['message'] = 'Article successfully created.';
                 } else {
                     $response['message'] = 'An error occured, please try again.';
                 }
@@ -46,15 +51,15 @@ class PostsController extends Controller
             }
             $this->newResponse($response);
             if ($response['result']) {
-                $this->redirect("/posts/read/{$slug}");
+                $this->redirect("/articles/read/{$slug}");
             } else{
-                $this->redirect('/posts/write');
+                $this->redirect('/articles/write');
             }
         } else {
             /** @var Tag $Tag */
             $Tag = $this->model('tag');
             $tags = $Tag->findAll('tag');
-            $this->render('posts', 'write', [
+            $this->render('articles', 'write', [
                 'title' => 'Write a new post',
                 'tags' => $tags,
             ]);
@@ -62,16 +67,17 @@ class PostsController extends Controller
     }
 
     /**
-     * @param string $slug
+     * View a certain article.
+     * @param string $slug The article's slug.
      * @return void
      */
     public function read(string $slug): void
     {
-        $Post = $this->model('post');
-        $post = $Post->findBy('post', 'slug', $slug);
-        $this->render('posts' , 'read', [
-            'title' => $post['title'],
-            'post' => $post,
+        $Article = $this->model('article');
+        $article = $Article->findBy('article', 'slug', $slug);
+        $this->render('article' , 'read', [
+            'title' => $article['title'],
+            'article' => $article,
         ]);
     }
 }

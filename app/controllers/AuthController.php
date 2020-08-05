@@ -4,15 +4,15 @@ namespace App\Controller;
 use App\Model\User;
 use Exception;
 /**
- * Basically the 'security' controller, used for logging in and registering.
+ * Basically the 'security' controller, used for logging and registering.
  * @property User $User
  */
 class AuthController extends Controller
 {
     /**
-     * Used to sign in the user.
+     * Login method.
      * @throws Exception
-     * @return Exception|void
+     * @return void
      */
     public function login(): void
     { // https://www.youtube.com/watch?v=wUkKCMEYj9M password recovery system!
@@ -64,7 +64,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Used to register the user and sign them in automatically.
+     * Registering the user and sign in automatically.
      * @return void
      */
     public function register(): void
@@ -113,7 +113,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Method used to 'logout', removing user from session.
+     * Logout method.
      * @return void
      */
     public function logout(): void

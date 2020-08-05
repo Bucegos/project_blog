@@ -1,7 +1,7 @@
 <?php
-
 use App\Helper\Elements;
 use App\Model\Role;
+use App\Model\User;
 
 ?>
 <!DOCTYPE html>
@@ -10,13 +10,18 @@ use App\Model\Role;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $data['title']; ?></title>
-    <link type="text/css" rel="stylesheet" href="<?= HOST; ?>assets/css/main.css" />
-    <link rel="icon" type="image/x-icon" href="<?= HOST; ?>assets/images/logo.svg">
+    <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'main.css'; ?>" />
+    <?php if (isset($customCss)) :
+        foreach($customCss as $file) : ?>
+        <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . "$file"; ?>" />
+    <?php endforeach;
+    endif; ?>
+    <link rel="icon" type="image/x-icon" href="<?= ASSETS_IMG . 'logo.svg'; ?>" />
 </head>
 <body>
 <nav class="navigation">
     <a class="logo" href="/">
-        <img class="logo__img" src="<?= HOST . 'assets/images/logo.svg'; ?>" alt="Logo" />
+        <img class="logo__img" src="<?= ASSETS_IMG . 'logo.svg'; ?>" alt="Logo" />
         <p>Blog</p>
     </a>
 <!--    ADD SEARCH!! -->
@@ -26,8 +31,8 @@ use App\Model\Role;
 <!--    </form>-->
     <ul class="navigation__menu">
         <li class="navigation__item">
-            <button class="button button--gradient" onclick="location.href='/posts/write'" type="button">
-                Write a post
+            <button class="button button--gradient" onclick="location.href='/articles/write'" type="button">
+                Write an artile
             </button>
         </li>
         <li class="navigation__item">
@@ -35,18 +40,18 @@ use App\Model\Role;
                 <?php if (isset($data['user'])) : ?>
                 <div class="navigation__user">
                     <button class="dropdown__toggler profile-image" role="button">
-                        <img src="<?= HOST . "assets/uploads/{$data['user']['image']}"; ?>" alt="profile" />
+                        <img src="<?= ASSETS_UPLOADS . "{$data['user']['image']}"; ?>" alt="profile" />
                     </button>
                     <ul class="navigation__user__content dropdown__content">
                         <li class="dropdown__item">
-	                        <a href="/account/reading-list">
-		                        Reading list[<?= isset($data['user']['reading_list_count']) ? $data['user']['reading_list_count'] : 0; ?>]
-	                        </a>
+                            <a href="/account/reading-list">
+                                Reading list[<?= isset($data['user']['reading_list_count']) ? $data['user']['reading_list_count'] : 0; ?>]
+                            </a>
                         </li>
                         <li class="dropdown__item"><a href="/account/dashboard">Dashboard</a></li>
                         <li class="dropdown__item"><a href="/account/drafts">Drafs[0]</a></li>
                         <li class="dropdown__item"><a href="/account/settings">Account Settings</a></li>
-                        <?php if ($data['user']['role'] === Role::ADMIN) : ?>
+                        <?php if ($data['user']['role'] === User::ADMIN) : ?>
                         <li class="dropdown__item navigation__user__admin"><a href="/admin">Admin</a></li>
                         <?php endif; ?>
                         <li class="navigation__user__logout">

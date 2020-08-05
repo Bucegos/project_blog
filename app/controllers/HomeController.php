@@ -1,10 +1,10 @@
 <?php
 namespace App\Controller;
 
-use App\Model\Post;
+use App\Model\Article;
 /**
  * This will serve as the default controller.
- * @property Post $Post
+ * @property Article $Article
  */
 class HomeController extends Controller
 {
@@ -14,12 +14,12 @@ class HomeController extends Controller
      */
     public function index(): void
     {
-        /** @var Post $Post */
-        $Post = $this->model('Post');
-        $posts = $Post->getPostsWithUserAndTags();
+        /** @var Article $Article */
+        $Article = $this->model('Article');
+        $articles = $Article->getArticlesFull();
         $this->render('home', 'index', [
             'title' => 'Home',
-            'posts' => $posts,
+            'articles' => $articles,
         ]);
     }
 }

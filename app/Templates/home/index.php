@@ -4,26 +4,26 @@ use App\Helper\Elements;
 
 ?>
 <section class="home container">
-    <h1>Posts</h1>
-    <?php foreach ($data['posts'] as $post) {
-        $post['likedByCurrentUser'] = false;
-        $post['onReadListForCurrentUser'] = false;
+    <h1>Articles</h1>
+    <?php foreach ($data['articles'] as $article) {
+        $article['likedByCurrentUser'] = false;
+        $article['onReadListForCurrentUser'] = false;
         if (isset($_SESSION['user'])) {
-            if (!empty($post['readers'])) {
-                foreach ($post['readers'] as $user) {
+            if (!empty($article['savedBy'])) {
+                foreach ($article['savedBy'] as $user) {
                     if ($user === (int)$_SESSION['user']['id']) {
-                        $post['onReadListForCurrentUser'] = true;
+                        $article['onReadListForCurrentUser'] = true;
                     }
                 }
             }
-            if (!empty($post['likedBy'])) {
-                foreach ($post['likedBy'] as $user) {
+            if (!empty($article['likedBy'])) {
+                foreach ($article['likedBy'] as $user) {
                     if ($user === (int)$_SESSION['user']['id']) {
-                        $post['likedByCurrentUser'] = true;
+                        $article['likedByCurrentUser'] = true;
                     }
                 }
             }
         }
-        Elements::add('post', $post);
+        Elements::add('article', $article);
     } ?>
 </section>

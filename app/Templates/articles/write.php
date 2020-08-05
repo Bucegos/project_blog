@@ -7,7 +7,7 @@ use App\Helper\Elements;
     <?php if (!$data['user']) : ?>
     <div class="post__login">
         <div class="post__login__message">
-            <img src="<?= HOST . 'assets/images/logo.svg'; ?>" alt="logo" />
+            <img src="<?= ASSETS_IMG . 'logo.svg'; ?>" alt="logo" />
             <div>
                 <h1>Welcome to "BLOG"</h1>
                 <p>Sign in below to compose your post and share it with the community.</p>

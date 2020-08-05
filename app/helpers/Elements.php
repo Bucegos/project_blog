@@ -1,10 +1,7 @@
 <?php
 namespace App\Helper;
 /**
-|--------------------------------------------------------------------------
-| Elements class
-|--------------------------------------------------------------------------
-| Used add elements on views.
+ * Used add elements on views.
  */
 class Elements
 {

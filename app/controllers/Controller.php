@@ -6,8 +6,7 @@ use App\Helper\Request;
 use App\Model\Model;
 use App\Model\Role;
 /**
- * This controller will be extended by all other controllers so
- * every useful/re-usable method will be inherited.
+ * Main app controller.
  */
 class Controller
 {
@@ -80,12 +79,12 @@ class Controller
 
     /**
      * Adding common variables to the view + setting cookies or session/local storage to be used in frontend.
-     * @param array $data
-     * @return array
+     * @param array $data Array of data comming from each individual controller action which renders a view.
+     * @return array      Returning the updated array of data to be used in the view.
      */
     private function __setCommonViewVariables(array $data): array
     {
-        // setting common variables to be used in frontend or backend.
+        // user data.
         if (isset($_SESSION['user'])) {
             $data['user'] = $_SESSION['user'];
             $data['user']['reading_list_count'] = $this->model('user')->getReadinglistCount((int)$data['user']['id']);
@@ -104,29 +103,21 @@ class Controller
     }
 
     /**
-     * Method used to 'slugify' a given string.
-     * @param $string 'The string to be 'slugified'
-     * @return string
+     * Method used to get the user id stored in session.
+     * @return int|null Return the user id or null if it's not set.
      */
-    public function slugify($string): string
+    protected function getUserId(): ?int
     {
-        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string), '-')) . uniqid();
+        return isset($_SESSION['user']['id']) ? (int)$_SESSION['user']['id'] : null;
     }
 
     /**
-     * Check if the logged user is an admin/author.
-     * @return bool
+     * Method used to 'slugify' a given string.
+     * @param string $string The string to be 'slugified'.
+     * @return string        Return the new 'slugified' string.
      */
-    protected function isAdminOrAuthor(): bool
+    public function slugify(string $string): string
     {
-        if (isset($_SESSION['user'])) {
-            if (
-                $_SESSION['user']['role'] === Role::ADMIN ||
-                $_SESSION['user']['role'] === Role::AUTHOR
-            ) {
-                return true;
-            }
-        }
-        return false;
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string), '-')) . uniqid();
     }
 }
