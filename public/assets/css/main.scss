@@ -266,11 +266,8 @@ ul {
     background-repeat: no-repeat;
     background-size: 2900%;
     margin-left: auto;
-    &.animated {
+    &.liked {
       background-position: right;
-    }
-    &.nanimated {
-      background-position: left;
     }
     &.animate {
       animation: heart-burst 1s steps(28) 1;

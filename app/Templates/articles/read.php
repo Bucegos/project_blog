@@ -9,7 +9,7 @@ if (isset($_SESSION['user'])) {
 <section class="article-read container">
     <aside class="article-read__actions sticky">
         <button
-            class="button--like <?= $article['liked_by_current_user'] ? 'animated' : ''; ?>"
+            class="button--like <?= $article['liked_by_current_user'] ? 'liked' : null; ?>"
             type="button"
             data-article-id="<?= $article['id']; ?>"
         >

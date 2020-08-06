@@ -263,12 +263,8 @@ ul {
   margin-left: auto;
 }
 
-.button--like.animated {
+.button--like.liked {
   background-position: right;
-}
-
-.button--like.nanimated {
-  background-position: left;
 }
 
 .button--like.animate {

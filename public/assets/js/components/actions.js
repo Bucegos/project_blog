@@ -14,24 +14,26 @@ export default class Actions {
     constructor(Utils, Notification) {
         this.Utils = Utils
         this.Notification = Notification
-        this.likeButtons = document.querySelectorAll('.button--like')
-        this.likeButtons.forEach(item => {
-            this.animate(item)
-            this.afterAnimate(item)
+        document.querySelectorAll('.button--like').forEach(item => {
+            this.like(item)
         })
-        this.bookmarkButtons = document.querySelectorAll('.button--bookmark')
-        this.bookmarkButtons.forEach(item => {
-              this.bookmark(item)
+        document.querySelectorAll('.button--bookmark').forEach(item => {
+            this.bookmark(item)
         })
     }
 
-    animate = (item) => {
+    like = (item) => {
         item.addEventListener('click', () => {
-            if (item.classList.contains('animated')) {
-                this.unlike(item).then(data => {
+            let data = {
+                article: item.dataset.articleId,
+                table: 'likes',
+                column: 'liked_by',
+            }
+            if (item.classList.contains('liked')) {
+                this.Utils.fetchJsonData(ROUTES.USER_REMOVE, data)
+                  .then(data => {
                     if (data.result) {
-                        item.classList.remove('animated')
-                        item.classList.add('nanimated')
+                        item.classList.remove('liked')
                         this.disableButton(item)
                     } else {
                         this.Notification.show({
@@ -42,10 +44,14 @@ export default class Actions {
                     }
                 })
             } else {
-                this.like(item).then(data => {
+                this.Utils.fetchJsonData(ROUTES.USER_ADD, data)
+                  .then(data => {
                     if (data.result) {
-                        item.classList.toggle('animate')
-                        item.classList.remove('nanimated')
+                        item.classList.add('liked')
+                        item.classList.add('animate')
+                        setTimeout(() => {
+                            item.classList.remove('animate')
+                        }, 2000)
                     } else {
                         this.Notification.show({
                             isPrompt: true,
@@ -56,38 +62,6 @@ export default class Actions {
                 })
             }
         })
-    }
-
-    afterAnimate = (item) => {
-        item.addEventListener('animationend', () => {
-            item.classList.toggle('animate')
-            item.classList.add('animated')
-        })
-    }
-
-    like = (item) => {
-        let data = {
-            article: item.dataset.articleId,
-            table: 'likes',
-            column: 'liked_by',
-        }
-        return this.Utils.fetchJsonData(ROUTES.USER_ADD, data)
-    }
-
-    unlike = (item) => {
-        let data = {
-            article: item.dataset.articleId,
-            table: 'likes',
-            column: 'liked_by',
-        }
-        return this.Utils.fetchJsonData(ROUTES.USER_REMOVE, data)
-    }
-
-    disableButton = (item) => {
-        item.disabled = true
-        setTimeout(() => {
-            item.disabled = false
-        }, 10000)
     }
 
     bookmark = (item) => {
@@ -136,5 +110,12 @@ export default class Actions {
                   })
             }
         })
+    }
+
+    disableButton = (item) => {
+        item.disabled = true
+        setTimeout(() => {
+            item.disabled = false
+        }, 10000)
     }
 }

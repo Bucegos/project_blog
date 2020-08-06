@@ -24,7 +24,7 @@
                     </p>
                 </div>
                 <button
-                    class="button--like <?= $data['liked_by_current_user'] ? 'animated' : ''; ?>"
+                    class="button--like <?= $data['liked_by_current_user'] ? 'liked' : null; ?>"
                     type="button"
                     data-article-id="<?=$data['id'];?>"
                 >
