@@ -130,7 +130,7 @@ class Article extends Model
             ON `article`.id = `article_tags`.article_id
         LEFT JOIN `tag`
             ON `article_tags`.tag_id = `tag`.id
-        WHERE `article`.status = "approved" AND `article`.author_id = :userId
+        WHERE `article`.status = "approved" AND `article`.author_id = :user_id
         GROUP BY `article`.id
         ORDER BY RAND()
         LIMIT 3';

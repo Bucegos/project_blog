@@ -41,11 +41,17 @@ if (isset($_SESSION['user'])) {
         <div class="article-read__user__articles">
             <h3>More from <?= $article['username'] ;?></h3>
             <?php foreach ($article['short_articles'] as $shortArticle) : ?>
-                <a href="<?= $shortArticle['slug'] ;?>"><?= $shortArticle['title'] ;?></a>
-                <?php foreach ($shortArticle['tags'] as $tag) : ?>
-                    <a href="/tags/<?= $tag ;?>"><?= $tag ;?></a>
-                <?php endforeach;
-            endforeach; ?>
+                <div class="article__read__user__articles__more">
+                    <a href="<?= $shortArticle['slug'] ;?>"><?= $shortArticle['title'] ;?></a>
+                    <?php if (!empty($shortArticle['tags'])) :
+                        foreach ($shortArticle['tags'] as $tag) : ?>
+                            <a href="/tags/<?= $tag ;?>">
+                                <span>#</span><?= $tag; ?>
+                            </a>
+                        <?php endforeach;
+                    endif; ?>
+                </div>
+            <?php endforeach; ?>
         </div>
     </aside>
 </section>
