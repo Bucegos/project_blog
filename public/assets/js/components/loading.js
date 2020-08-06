@@ -1,11 +1,6 @@
 /**
- |--------------------------------------------------------------------------
- | Loading class
- |--------------------------------------------------------------------------
- |
- | This class will be used to show a loading spinner and modify the content
- | that's being changed accordingly.
- |
+ This class will be used to show a loading spinner and modify the content
+ that's being changed accordingly.
  */
 export default class Loading {
 

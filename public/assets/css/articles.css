@@ -15,6 +15,7 @@
 /* Articles */
 .article {
   /* Everything related to the article element itself(mini or not) */
+  width: 100%;
   background-color: #292e33;
   margin-bottom: 1rem;
   border-radius: 0.25rem;
@@ -39,7 +40,6 @@
 }
 
 .article__cover {
-  width: 100%;
   height: 350px;
   background-position: center;
   background-repeat: no-repeat;
@@ -65,7 +65,10 @@
 .article__misc {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+
+.article__misc button {
+  margin-left: auto;
 }
 
 .article__input {
@@ -164,10 +167,46 @@
   justify-content: space-between;
 }
 
-.article-read__actions {
-  height: 25vh;
+.article-read .article {
+  width: 65%;
+}
+
+.article-read aside {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
 }
 
 .article-read__user {
-  height: 25vh;
+  width: 25%;
+}
+
+.article-read__user .profile-image {
+  margin-bottom: 1rem;
+}
+
+.article-read__user .profile-image a {
+  display: flex;
+  align-items: center;
+}
+
+.article-read__user .profile-image a img {
+  margin-right: 0.5rem;
+}
+
+.article-read__user__info {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.article-read__user__info p:nth-child(3) {
+  text-transform: uppercase;
+  color: #fff;
+  margin-top: 1rem;
+}
+
+.article-read__user__info, .article-read__user__articles {
+  background-color: #292e33;
+  border-radius: 0.25rem;
+  border: 2px solid #303840;
 }

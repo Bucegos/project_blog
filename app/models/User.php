@@ -22,8 +22,8 @@ class User extends Model
     {
         $currentTimestamp = $this->getCurrentTimestamp();
         $sql = "INSERT INTO
-            user(username, email, password, created)
-            VALUES (:username, :email, :pass, :created)  
+            user(username, email, password, joined)
+            VALUES (:username, :email, :pass, :joined)
         ";
         try {
             $query = $this->pdo->prepare($sql);
@@ -31,7 +31,7 @@ class User extends Model
                 ':username' => $username,
                 ':email' => $email,
                 ':pass' => $password,
-                ':created' => $currentTimestamp,
+                ':joined' => $currentTimestamp,
             ]);
             $userId = $this->pdo->lastInsertId();
             return $this->findBy('user', 'id', $userId);

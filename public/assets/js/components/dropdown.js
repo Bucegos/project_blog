@@ -1,11 +1,6 @@
 /**
- |--------------------------------------------------------------------------
- | Dropdown class
- |--------------------------------------------------------------------------
- |
- | This class will be used to create common dropdowns. It can also deal
- | with multiple dropdowns as it checks for all 'dropdown__toggler' classes.
- |
+ This class will be used to create common dropdowns. It can also deal
+ with multiple dropdowns as it checks for all 'dropdown__toggler' classes.
  */
 export default class Dropdown {
     constructor() {

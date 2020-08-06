@@ -1,21 +1,16 @@
 import ROUTES from '../components/routes.js'
 /**
- |--------------------------------------------------------------------------
- | Articles class
- |--------------------------------------------------------------------------
- |
- | This class will deal with all 'articles' related stuff.
- | OBSERVATIONS REGARDING prepareUpload and removeImage!!! :
- |     Resetting lastImage and articleCoverInput so the user can
- |   select the same image they previously uploaded(just in case)
- |   * articleCoverInput is triggered only 'onChange'
- |   * images can be manually removed or removed when they're changed
- |     Also doing it like this won't let the user select the same image
- |   if it's already uploaded :)
- | @TODO: This still has to be improved because we're loosing the data if the user
- | were to refresh the page -> perhaps store this in the session or somethind to
- | still be able to keep track of things even in case of a refresh.
- |
+ This class will deal with all 'articles' related stuff.
+ OBSERVATIONS REGARDING prepareUpload and removeImage!!! :
+     Resetting lastImage and articleCoverInput so the user can
+   select the same image they previously uploaded(just in case)
+   * articleCoverInput is triggered only 'onChange'
+   * images can be manually removed or removed when they're changed
+     Also doing it like this won't let the user select the same image
+   if it's already uploaded :)
+ @TODO: This still has to be improved because we're loosing the data if the user
+ were to refresh the page -> perhaps store this in the session or somethind to
+ still be able to keep track of things even in case of a refresh.
  */
 export default class Articles {
 

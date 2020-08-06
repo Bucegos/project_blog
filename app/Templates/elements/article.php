@@ -1,8 +1,8 @@
 <?php $useMini = isset($data['mini']) && $data['mini'] === true; ?>
-<div class="article">
+<article class="article">
     <?php if (!empty($data['cover'])) : ?>
         <a href="<?= "/articles/read/{$data['slug']}" ;?>">
-            <div class="article__cover <?= $useMini ? 'article__cover--mini' : '' ;?>"
+            <div class="article__cover <?= $useMini ? 'article__cover--mini' : null ;?>"
                  style="background-image: url(<?= ASSETS_UPLOADS . "{$data['cover']}" ;?>)"
             ></div>
         </a>
@@ -12,7 +12,7 @@
             <div class="article__info">
                 <div class="profile-image">
                     <a href="/users/<?= $data['username']; ?>">
-                        <img src="<?= ASSETS_IMG . "{$data['image']}"; ?>" alt="profile" />
+                        <img src="<?= ASSETS_IMG . "{$data['user_image']}"; ?>" alt="profile" />
                     </a>
                 </div>
                 <div>
@@ -27,6 +27,7 @@
                     class="button--like <?= $data['liked_by_current_user'] ? 'liked' : null; ?>"
                     type="button"
                     data-article-id="<?=$data['id'];?>"
+                    title="<?= $data['liked_by_current_user'] ? 'Unlike article' : 'Like article'; ?>"
                 >
                 </button>
             </div>
@@ -53,6 +54,7 @@
                     class="button button--bookmark <?= $data['bookmarked_by_current_user'] ? 'bookmarked' : null; ?>"
                     type="button"
                     data-article-id="<?=$data['id'];?>"
+                    title="<?= $data['liked_by_current_user'] ? 'Remove bookmark' : 'Bookmark article'; ?>"
                 >
                     <?= $data['bookmarked_by_current_user'] ? 'SAVED' : 'SAVE'; ?>
                 </button>
@@ -97,4 +99,4 @@
             </div>
         <?php endif; ?>
     </div>
-</div>
+</article>

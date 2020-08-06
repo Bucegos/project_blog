@@ -7,13 +7,8 @@ import Actions from './components/actions.js'
 import Utils from './components/utils.js';
 
 /**
- |--------------------------------------------------------------------------
- | Main App class
- |--------------------------------------------------------------------------
- |
- | This class will be instantiated on every request and will be used to
- | instantiate all other classes + pass down certain 'helper' methods.
- |
+ This class will be instantiated on every request and will be used to
+ instantiate all other classes + pass down certain 'helper' methods.
  */
 class App {
 

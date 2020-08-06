@@ -1,10 +1,5 @@
 /**
- |--------------------------------------------------------------------------
- | Notification class
- |--------------------------------------------------------------------------
- |
- | This class will be used to show notifications such as messages, errors, etc.
- |
+ This class will be used to show notifications such as messages, errors, etc.
  */
 export default class Notification {
 

@@ -1,13 +1,7 @@
 import ROUTES from './routes.js';
 /**
- |--------------------------------------------------------------------------
- | Actions class
- |--------------------------------------------------------------------------
- |
- | This class will deal with commomn user actions, such as 'likes', 'adding'
- | a post to their read list, etc.
- |
- |
+ This class will deal with commomn user actions, such as 'likes', 'adding'
+ a post to their read list, etc.
  */
 export default class Actions {
 
@@ -34,6 +28,7 @@ export default class Actions {
                   .then(data => {
                     if (data.result) {
                         item.classList.remove('liked')
+                        item.setAttribute('title', 'Like article')
                         this.disableButton(item)
                     } else {
                         this.Notification.show({
@@ -47,6 +42,7 @@ export default class Actions {
                 this.Utils.fetchJsonData(ROUTES.USER_ADD, data)
                   .then(data => {
                     if (data.result) {
+                        item.setAttribute('title', 'Unlike article')
                         item.classList.add('liked')
                         item.classList.add('animate')
                         setTimeout(() => {
@@ -75,6 +71,7 @@ export default class Actions {
                 this.Utils.fetchJsonData(ROUTES.USER_REMOVE, data)
                   .then(data => {
                       if (data.result) {
+                          item.setAttribute('title', 'Bookmark article')
                           item.classList.remove('bookmarked')
                           this.disableButton(item)
                           if (item.classList.contains('button--bookmark--mini')) {
@@ -94,6 +91,7 @@ export default class Actions {
                 this.Utils.fetchJsonData(ROUTES.USER_ADD, data)
                   .then(data => {
                       if (data.result) {
+                          item.setAttribute('title', 'Remove bookmark')
                           item.classList.add('bookmarked')
                           if (item.classList.contains('button--bookmark--mini')) {
                               item.getElementsByTagName('i')[0].classList.replace('far', 'fas')

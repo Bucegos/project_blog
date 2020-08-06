@@ -12,13 +12,14 @@ if (isset($_SESSION['user'])) {
             class="button--like <?= $article['liked_by_current_user'] ? 'liked' : null; ?>"
             type="button"
             data-article-id="<?= $article['id']; ?>"
+            title="<?= $article['liked_by_current_user'] ? 'Unlike article' : 'Like article'; ?>"
         >
         </button>
         <button
             class="button button--bookmark button--bookmark--mini <?= $article['bookmarked_by_current_user'] ? 'bookmarked' : null; ?>"
             type="button"
             data-article-id="<?=$article['id'];?>"
-            title="Bookmark this article"
+            title="<?= $article['bookmarked_by_current_user'] ? 'Remove bookmark' : 'Bookmark article'; ?>"
         >
             <i class="<?= $article['bookmarked_by_current_user'] ? 'fas' : 'far' ;?> fa-bookmark"></i>
         </button>
@@ -26,8 +27,20 @@ if (isset($_SESSION['user'])) {
     </aside>
     <?php Elements::add('article', $article); ?>
     <aside class="article-read__user sticky">
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
+        <div class="article-read__user__info">
+            <div class="profile-image">
+                <a href="/users/<?= $article['username']; ?>">
+                    <img src="<?= ASSETS_IMG . "{$article['user_image']}"; ?>" alt="profile" />
+                    <p><?= $article['username']; ?></p>
+                </a>
+            </div>
+            <p><?= $article['user_summary'] ;?></p>
+            <p>Joined</p>
+            <p><?= date("M jS, Y", strtotime($article['user_joined'])); ?></p>
+        </div>
+        <div class="article-read__user__articles">
+            <h3>More from <?= $article['username'] ;?></h3>
+
+        </div>
     </aside>
 </section>

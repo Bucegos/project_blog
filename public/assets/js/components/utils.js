@@ -1,11 +1,6 @@
 /**
- |--------------------------------------------------------------------------
- | Utils class
- |--------------------------------------------------------------------------
- |
- | This class will contain all the useful methods that can be re-used
- | throughout the project.
- |
+ This class will contain all the useful methods that can be re-used
+ throughout the project.
  */
 export default class Utils {
 
