@@ -6,9 +6,9 @@ import ROUTES from '../components/routes.js'
  |
  | This class will deal with all 'articles' related stuff.
  | OBSERVATIONS REGARDING prepareUpload and removeImage!!! :
- |     Resetting lastImage and imageInput so the user can
+ |     Resetting lastImage and articleCoverInput so the user can
  |   select the same image they previously uploaded(just in case)
- |   * imageInput is triggered only 'onChange'
+ |   * articleCoverInput is triggered only 'onChange'
  |   * images can be manually removed or removed when they're changed
  |     Also doing it like this won't let the user select the same image
  |   if it's already uploaded :)
@@ -19,23 +19,22 @@ import ROUTES from '../components/routes.js'
  */
 export default class Articles {
 
-    #hasUploaded = false
     #lastImage = null
 
     constructor(Loading, Notification) {
         this.Loading = Loading
         this.Notification = Notification
-        this.editButton = document.getElementById('postEditButton')
-        this.previewButton = document.getElementById('postPreviewButton')
-        this.coverButton = document.getElementById('postCoverButton')
-        this.removeCoverButton = document.getElementById('postRemoveCoverButton')
-        this.imageInput = document.getElementById('imageInput')
-        this.coverInput = document.getElementById('postCoverInput')
-        this.editPost = document.querySelector('.post__edit')
-        this.previewPost = document.querySelector('.post__preview')
-        this.postCoverMiniPreview = document.querySelector('.post__cover--mini-preview')
-        this.draftButton = document.getElementById('postDraft')
-        this.form = document.getElementById('post')
+        this.editButton = document.getElementById('articleEditButton')
+        this.previewButton = document.getElementById('articlePreviewButton')
+        this.coverButton = document.getElementById('articleCoverButton')
+        this.removeCoverButton = document.getElementById('articleRemoveCoverButton')
+        this.articleCoverInput = document.getElementById('articleCoverInput')
+        this.articleCoverFilename = document.getElementById('articleCoverFilename')
+        this.editPost = document.querySelector('.article-write__edit')
+        this.previewPost = document.querySelector('.article-write__preview')
+        this.postCoverMiniPreview = document.querySelector('.article-write__cover--mini-preview')
+        this.draftButton = document.getElementById('articleDraft')
+        this.form = document.getElementById('articleForm')
         this.formData = new FormData
         if (this.coverButton !== null) {
             this.prepareUpload()
@@ -66,10 +65,10 @@ export default class Articles {
 
     prepareUpload = () => {
         this.coverButton.addEventListener('click', () => {
-            this.imageInput.click()
+            this.articleCoverInput.click()
         })
-        this.imageInput.addEventListener('change', () => {
-            let file = this.imageInput.files
+        this.articleCoverInput.addEventListener('change', () => {
+            let file = this.articleCoverInput.files
             if (file.length > 0) {
                 this.formData.append('image', file[0])
                 this.Loading.show()
@@ -78,7 +77,7 @@ export default class Articles {
                         .then(response => {
                             if (response.result) {
                                 this.#lastImage = null
-                                this.imageInput.value = null
+                                this.articleCoverInput.value = null
                             } else {
                                 this.Notification.show({
                                     isPrompt: true,
@@ -96,9 +95,8 @@ export default class Articles {
                             message: response.message,
                             imgPath: ROUTES.CHECK_IMAGE,
                         })
-                        this.#hasUploaded = true
                         this.#lastImage = response.image
-                        this.coverInput.value = this.#lastImage
+                        this.articleCoverFilename.value = this.#lastImage
                         this.postCoverMiniPreview.classList.remove('hide')
                         this.postCoverMiniPreview.style.
                             backgroundImage = `url(../assets/uploads/${response.image})`
@@ -138,8 +136,8 @@ export default class Articles {
                 .then(response => {
                     if (response.result) {
                         this.#lastImage = null
-                        this.imageInput.value = null
-                        this.coverInput.value = this.#lastImage
+                        this.articleCoverInput.value = null
+                        this.articleCoverFilename.value = this.#lastImage
                         this.postCoverMiniPreview.classList.add('hide')
                         this.postCoverMiniPreview.removeAttribute('style')
                         this.coverButton.innerText = 'Add a cover image'

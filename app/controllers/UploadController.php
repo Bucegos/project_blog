@@ -11,7 +11,7 @@ class UploadController extends Controller
 
     public function __construct()
     {
-
+        parent::__construct();
     }
 
     private function checkLeftOvers()
