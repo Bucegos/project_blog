@@ -31,6 +31,7 @@ class ArticlesController extends Controller
                 /** @var User $User */
                 $User = $this->model('user');
                 $data['status'] = $User->isAdmin($userId) || $User->isAuthor($userId) ? 'approved' : 'created';
+                $data['tags'] = $data['tags'] ?? null;
                 $article = $Article->new(
                     $data['author_id'],
                     $data['title'],
@@ -52,8 +53,6 @@ class ArticlesController extends Controller
             $this->newResponse($response);
             if ($response['result']) {
                 $this->redirect("/articles/read/{$slug}");
-            } else{
-                $this->redirect('/articles/write');
             }
         } else {
             /** @var Tag $Tag */
@@ -82,6 +81,7 @@ class ArticlesController extends Controller
         // the 'article' element.
         if ($article !== false) {
             $article = $article[0];
+            $article['short_articles'] = $Article->getArticlesShort($this->getUserId());
         }
         $this->render('articles' , 'read', [
             'title' => $article['title'],

@@ -37,17 +37,19 @@ class Article extends Model
                 ':created_at' => $currentTimestamp,
             ]);
             $articleId = $this->pdo->lastInsertId();
-            foreach ($tagIds as $tagId) {
-                $sql = "INSERT INTO article_tags(article_id, tag_id) VALUES (:article_id, :tag_id)";
-                try {
-                    $query = $this->pdo->prepare($sql);
-                    $query->execute([
-                        ':article_id' => $articleId,
-                        ':tag_id' => $tagId,
-                    ]);
-                } catch (PDOException $e) {
-                    Logger::logError($e->getMessage(), "article_tag_new_{$articleId}");
-                    return false;
+            if (!empty($tagIds)) {
+                foreach ($tagIds as $tagId) {
+                    $sql = "INSERT INTO article_tags(article_id, tag_id) VALUES (:article_id, :tag_id)";
+                    try {
+                        $query = $this->pdo->prepare($sql);
+                        $query->execute([
+                            ':article_id' => $articleId,
+                            ':tag_id' => $tagId,
+                        ]);
+                    } catch (PDOException $e) {
+                        Logger::logError($e->getMessage(), "article_tag_new_{$articleId}");
+                        return false;
+                    }
                 }
             }
             return true;
@@ -128,10 +130,13 @@ class Article extends Model
             ON `article`.id = `article_tags`.article_id
         LEFT JOIN `tag`
             ON `article_tags`.tag_id = `tag`.id
-        WHERE `article`.status = "approved"
-        GROUP BY `article`.id';
+        WHERE `article`.status = "approved" AND `article`.author_id = :userId
+        GROUP BY `article`.id
+        ORDER BY RAND()
+        LIMIT 3';
         try {
-            $query = $this->pdo->query($sql);
+            $query = $this->pdo->prepare($sql);
+            $query->execute([':user_id' => $userId]);
             $articles = $query->fetchAll();
             foreach ($articles as &$article) {
                 $article['tags'] = array_unique(json_decode($article['tags']));
