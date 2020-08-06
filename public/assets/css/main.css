@@ -43,28 +43,7 @@
 |--------------------------------------------------------------------------
 |
 */
-@-webkit-keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateY(6rem);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-  }
-}
 @keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateY(6rem);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-  }
-}
-
-@-webkit-keyframes fadeInDown {
   0% {
     opacity: 0;
     -webkit-transform: translateY(6rem);
@@ -86,15 +65,6 @@
   }
 }
 
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
 @keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -105,14 +75,6 @@
 }
 
 /* Heart animation */
-@-webkit-keyframes heart-burst {
-  from {
-    background-position: left;
-  }
-  to {
-    background-position: right;
-  }
-}
 @keyframes heart-burst {
   from {
     background-position: left;
@@ -151,8 +113,7 @@
 }
 
 body, html {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   height: 100vh;
 }
 
@@ -160,16 +121,14 @@ body {
   position: relative;
   padding: 0;
   margin: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background-color: #1d2126;
   color: #B2B6BB;
   overflow-x: hidden;
 }
 
 *, *:before, *:after {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 *:focus {
@@ -211,7 +170,6 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: #B2B6BB;
   -webkit-box-shadow: none !important;
   background-color: #1d2126 !important;
-  -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -266,8 +224,7 @@ ul {
   text-transform: uppercase;
   border: none;
   border-radius: .2rem;
-  -webkit-box-shadow: inset 0 -0.2rem 0 rgba(0, 0, 0, 0.15);
-          box-shadow: inset 0 -0.2rem 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -0.2rem 0 rgba(0, 0, 0, 0.15);
 }
 
 .button:focus {
@@ -306,10 +263,6 @@ ul {
   margin-left: auto;
 }
 
-.button--like:hover {
-  background-position: right;
-}
-
 .button--like.animated {
   background-position: right;
 }
@@ -318,25 +271,15 @@ ul {
   background-position: left;
 }
 
-.button--like.nanimated:hover {
-  background-position: right;
-}
-
 .button--like.animate {
-  -webkit-animation: heart-burst 1s steps(28) 1;
-          animation: heart-burst 1s steps(28) 1;
-}
-
-.button--reading-list {
-  margin-left: auto;
+  animation: heart-burst 1s steps(28) 1;
 }
 
 .button--outline {
   color: #B2B6BB;
   background-color: unset;
   border: 3px solid #7B78FF;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   padding: 7px 17px;
 }
 
@@ -345,8 +288,7 @@ ul {
   background-color: #7B78FF;
   border: none;
   padding: 10px 20px;
-  -webkit-box-shadow: inset 0 -0.2rem 0 rgba(0, 0, 0, 0.15);
-          box-shadow: inset 0 -0.2rem 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -0.2rem 0 rgba(0, 0, 0, 0.15);
 }
 
 .button--outline:focus {
@@ -365,32 +307,38 @@ ul {
   background-color: unset;
   border-bottom: 3px solid #7B78FF;
   padding: 7px 17px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 .button--outline--active:focus {
   background-color: unset;
 }
 
-.button--reading-list.saved {
+.button--bookmark.bookmarked {
   background-color: #444F5B;
-  -webkit-box-shadow: unset;
-          box-shadow: unset;
+  box-shadow: unset;
+}
+
+.button--bookmark--mini {
+  width: 50px;
+  cursor: pointer;
+  background-color: unset !important;
+  border-radius: 0.25rem;
+  border: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.button--bookmark--mini i {
+  margin: 0 auto;
+  font-size: 2rem;
 }
 
 .button--top {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   z-index: 999;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transition: all .25s ease-in-out;
+  justify-content: center;
+  align-items: center;
   transition: all .25s ease-in-out;
   font-size: 1.5rem;
   position: fixed;
@@ -402,13 +350,11 @@ ul {
 }
 
 .button--gradient {
-  background: -webkit-gradient(linear, left top, right top, from(#528BFF), to(#1abb9c));
   background: linear-gradient(to right, #528BFF, #1abb9c);
   text-align: center;
   color: #fff;
   padding: 10px 20px;
-  -webkit-box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1), 0 10px 30px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1), 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1), 0 10px 30px 0 rgba(0, 0, 0, 0.2);
 }
 
 a {
@@ -416,7 +362,6 @@ a {
   font-weight: bold;
   color: #fff;
   text-decoration: none;
-  -webkit-transition: all 500ms;
   transition: all 500ms;
 }
 
@@ -425,13 +370,8 @@ a:hover {
 }
 
 .form {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .form__input {
@@ -466,8 +406,7 @@ a:hover {
   right: 0;
   top: 3rem;
   padding: 1rem;
-  -webkit-box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.75);
-          box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.75);
 }
 
 .dropdown__item {
@@ -499,8 +438,7 @@ a:hover {
 }
 
 .spinner div {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   display: block;
   position: absolute;
   width: 3rem;
@@ -508,24 +446,20 @@ a:hover {
   margin: 0.5rem;
   border: 0.5rem solid #528BFF;
   border-radius: 50%;
-  -webkit-animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-          animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #528BFF transparent transparent transparent;
 }
 
 .spinner div:nth-child(1) {
-  -webkit-animation-delay: -0.45s;
-          animation-delay: -0.45s;
+  animation-delay: -0.45s;
 }
 
 .spinner div:nth-child(2) {
-  -webkit-animation-delay: -0.3s;
-          animation-delay: -0.3s;
+  animation-delay: -0.3s;
 }
 
 .spinner div:nth-child(3) {
-  -webkit-animation-delay: -0.15s;
-          animation-delay: -0.15s;
+  animation-delay: -0.15s;
 }
 
 /* Layout */
@@ -535,25 +469,16 @@ a:hover {
 }
 
 .navigation {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: 0.5rem 5rem;
   background-color: #292e33;
-  -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
-          box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .navigation__menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   list-style: none;
   margin-left: auto;
 }
@@ -567,12 +492,8 @@ a:hover {
 }
 
 .logo {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .logo__img {
@@ -593,8 +514,7 @@ a:hover {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   overflow: hidden;
 }
 
@@ -603,22 +523,23 @@ a:hover {
   opacity: 0.5;
 }
 
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 6rem;
+}
+
 .notification {
   position: fixed;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   background-color: #292e33;
   z-index: 999;
   top: 100%;
   left: 2rem;
   padding: 1rem;
   border-radius: 0.25rem;
-  -webkit-box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.75);
-          box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.75);
 }
 
 .notification--show {
@@ -674,4 +595,3 @@ a.tag:hover span {
   color: #DC3545;
   background: unset;
 }
-/*# sourceMappingURL=main.css.map */

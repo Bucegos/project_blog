@@ -87,7 +87,7 @@ class Controller
         // user data.
         if (isset($_SESSION['user'])) {
             $data['user'] = $_SESSION['user'];
-            $data['user']['reading_list_count'] = $this->model('user')->getReadinglistCount((int)$data['user']['id']);
+            $data['user']['bookmarks_count'] = $this->model('user')->getReadinglistCount((int)$data['user']['id']);
         }
         // setting the response for the view.
         if (isset($_SESSION['response'])) {

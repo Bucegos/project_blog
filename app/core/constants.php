@@ -1,12 +1,14 @@
 <?php
 // The server/domain name
-define('HOST', 'http://blog.local/');
+define('HOST', 'http://blog.local');
 // Assets paths used in frontend
 define('ASSETS_CSS', HOST . '/assets/css/');
 define('ASSETS_JS', HOST . '/assets/js/');
 define('ASSETS_IMG', HOST . '/assets/images/');
 define('ASSETS_FONT', HOST . '/assets/css/');
 define('ASSETS_UPLOADS', HOST . '/assets/uploads/');
+// Vendor path(public)
+define('VENDOR', HOST . '/vendor/');
 // Database info
 define('DATABASE_SERVERNAME', 'localhost');
 define('DATABASE_USERNAME', 'root');

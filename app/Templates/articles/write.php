@@ -51,7 +51,7 @@ use App\Helper\Elements;
                 <img src="<?= ASSETS_IMG . 'logo.svg'; ?>" alt="logo" />
                 <div>
                     <h1>Welcome to "BLOG"</h1>
-                    <p>Sign in below to compose your post and share it with the community.</p>
+                    <p>Sign in below to compose your article and share it with the community.</p>
                 </div>
             </div>
             <div class="article-write__login__form">

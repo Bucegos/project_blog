@@ -34,7 +34,7 @@ class UsersController extends Controller
                 /** @var User $User */
                 $User = $this->model('user');
                 if (isset($_SESSION['user'])) {
-                    $liked = $User->add($data['post'], $this->currentLoggedUser, "article_$table", $column);
+                    $liked = $User->add($data['article'], $this->currentLoggedUser, "article_$table", $column);
                     if ($liked !== false) {
                         $response['result'] = true;
                         $response['message'] = 'Success!';
@@ -69,7 +69,7 @@ class UsersController extends Controller
                 $column = $data['column'];
                 /** @var User $User */
                 $User = $this->model('user');
-                $unliked = $User->remove($data['post'], $this->currentLoggedUser, "article_$table", $column);
+                $unliked = $User->remove($data['article'], $this->currentLoggedUser, "article_$table", $column);
                 if ($unliked !== false) {
                     $response['result'] = true;
                     $response['message'] = 'Success!';

@@ -12,7 +12,7 @@
             <div class="article__info">
                 <div class="profile-image">
                     <a href="/users/<?= $data['username']; ?>">
-                        <img src="<?= ASSETS_UPLOADS . "{$data['image']}"; ?>" alt="profile" />
+                        <img src="<?= ASSETS_IMG . "{$data['image']}"; ?>" alt="profile" />
                     </a>
                 </div>
                 <div>
@@ -24,9 +24,9 @@
                     </p>
                 </div>
                 <button
-                    class="button--like <?= $data['likedByCurrentUser'] ? 'animated' : ''; ?>"
+                    class="button--like <?= $data['liked_by_current_user'] ? 'animated' : ''; ?>"
                     type="button"
-                    data-post-id="<?=$data['id'];?>"
+                    data-article-id="<?=$data['id'];?>"
                 >
                 </button>
             </div>
@@ -50,11 +50,11 @@
             <?php endif; ?>
             <?php if ($useMini) : ?>
                 <button
-                    class="button button--reading-list <?= $data['onReadListForCurrentUser'] ? 'saved' : null; ?>"
+                    class="button button--bookmark <?= $data['bookmarked_by_current_user'] ? 'bookmarked' : null; ?>"
                     type="button"
-                    data-post-id="<?=$data['id'];?>"
+                    data-article-id="<?=$data['id'];?>"
                 >
-                    <?= $data['onReadListForCurrentUser'] ? 'SAVED' : 'SAVE'; ?>
+                    <?= $data['bookmarked_by_current_user'] ? 'SAVED' : 'SAVE'; ?>
                 </button>
             <?php endif; ?>
         </div>
@@ -67,6 +67,33 @@
         <?php else: ?>
             <div class="article__content">
                 <?= $data['content']; ?>
+                <p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p><p>test</p>
+                <p>test</p>
+                <p>test</p>
             </div>
         <?php endif; ?>
     </div>

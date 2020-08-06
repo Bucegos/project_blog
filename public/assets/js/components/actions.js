@@ -19,9 +19,9 @@ export default class Actions {
             this.animate(item)
             this.afterAnimate(item)
         })
-        this.readingButtons = document.querySelectorAll('.button--reading-list')
-        this.readingButtons.forEach(item => {
-	          this.readingList(item)
+        this.bookmarkButtons = document.querySelectorAll('.button--bookmark')
+        this.bookmarkButtons.forEach(item => {
+              this.bookmark(item)
         })
     }
 
@@ -67,7 +67,7 @@ export default class Actions {
 
     like = (item) => {
         let data = {
-            post: item.dataset.postId,
+            article: item.dataset.articleId,
             table: 'likes',
             column: 'liked_by',
         }
@@ -76,7 +76,7 @@ export default class Actions {
 
     unlike = (item) => {
         let data = {
-            post: item.dataset.postId,
+            article: item.dataset.articleId,
             table: 'likes',
             column: 'liked_by',
         }
@@ -90,20 +90,24 @@ export default class Actions {
         }, 10000)
     }
 
-    readingList = (item) => {
+    bookmark = (item) => {
         item.addEventListener('click', () => {
             let data = {
-                post: item.dataset.postId,
+                article: item.dataset.articleId,
                 table: 'bookmarks',
                 column: 'bookmarked_by',
             }
-            if (item.classList.contains('saved')) {
+            if (item.classList.contains('bookmarked')) {
                 this.Utils.fetchJsonData(ROUTES.USER_REMOVE, data)
                   .then(data => {
                       if (data.result) {
-                          item.classList.remove('saved')
-                          item.innerText = 'SAVE'
+                          item.classList.remove('bookmarked')
                           this.disableButton(item)
+                          if (item.classList.contains('button--bookmark--mini')) {
+                              item.getElementsByTagName('i')[0].classList.replace('fas', 'far')
+                          } else {
+                              item.innerText = 'SAVE'
+                          }
                       } else {
                           this.Notification.show({
                               isPrompt: true,
@@ -116,8 +120,12 @@ export default class Actions {
                 this.Utils.fetchJsonData(ROUTES.USER_ADD, data)
                   .then(data => {
                       if (data.result) {
-                          item.classList.add('saved')
-                          item.innerText = 'SAVED'
+                          item.classList.add('bookmarked')
+                          if (item.classList.contains('button--bookmark--mini')) {
+                              item.getElementsByTagName('i')[0].classList.replace('far', 'fas')
+                          } else {
+                              item.innerText = 'SAVED'
+                          }
                       } else {
                           this.Notification.show({
                               isPrompt: true,

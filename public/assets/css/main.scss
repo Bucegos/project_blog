@@ -266,17 +266,11 @@ ul {
     background-repeat: no-repeat;
     background-size: 2900%;
     margin-left: auto;
-    &:hover {
-      background-position: right;
-    }
     &.animated {
       background-position: right;
     }
     &.nanimated {
       background-position: left;
-      &:hover {
-        background-position: right;
-      }
     }
     &.animate {
       animation: heart-burst 1s steps(28) 1;
@@ -315,10 +309,25 @@ ul {
       }
     }
   }
-  &--reading-list {
-    &.saved {
+  &--bookmark {
+    &.bookmarked {
       background-color: #444F5B;
       box-shadow: unset;
+    }
+    &--mini {
+      width: 50px;
+      cursor: pointer;
+      background-color: unset!important;
+      border-radius: 0.25rem;
+      border: none;
+      padding: 0;
+      margin-top: 1rem;
+      i {
+        margin: 0 auto;
+        font: {
+          size: 2rem;
+        }
+      }
     }
   }
   &--top {
@@ -497,6 +506,12 @@ a {
 .busy {
   pointer-events: none;
   opacity: 0.5;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 6rem; // navbar is 4rem in height + 2rem applied to the container = perfect allignment 6rem for sticky aside
 }
 
 .notification {

@@ -8,6 +8,7 @@ use App\Model\User;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $data['title']; ?></title>
+    <link type="text/css" rel="stylesheet" href="<?= VENDOR . 'fontawesome/css/all.min.css'; ?>" />
     <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'main.css'; ?>" />
     <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'login.css'; ?>" />
     <link type="text/css" rel="stylesheet" href="<?= ASSETS_CSS . 'articles.css'; ?>" />
@@ -40,12 +41,12 @@ use App\Model\User;
                 <?php if (isset($data['user'])) : ?>
                 <div>
                     <button class="dropdown__toggler profile-image" role="button">
-                        <img src="<?= ASSETS_UPLOADS . "{$data['user']['image']}"; ?>" alt="profile" />
+                        <img src="<?= ASSETS_IMG . "{$data['user']['image']}"; ?>" alt="profile" />
                     </button>
                     <ul class="dropdown__content">
                         <li class="dropdown__item">
                             <a href="/account/reading-list">
-                                Reading list[<?= isset($data['user']['reading_list_count']) ? $data['user']['reading_list_count'] : 0; ?>]
+                                Reading list[<?= isset($data['user']['bookmarks_count']) ? $data['user']['bookmarks_count'] : 0; ?>]
                             </a>
                         </li>
                         <li class="dropdown__item"><a href="/account/dashboard">Dashboard</a></li>

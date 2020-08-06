@@ -66,10 +66,10 @@ class Article extends Model
     {
         $sql = 'SELECT `article`.id, `article`.title, `article`.content, `article`.cover,
             `article`.status, `article`.created_at, `article`.slug,
-            count(DISTINCT `article_likes`.liked_by) as likes,
-            JSON_ARRAYAGG(`article_likes`.liked_by) AS likedBy,
+            count(DISTINCT `article_likes`.liked_by) as liked_by,
+            JSON_ARRAYAGG(`article_likes`.liked_by) AS liked_by,
             JSON_ARRAYAGG(`tag`.name) AS tags,
-            JSON_ARRAYAGG(`article_bookmarks`.bookmarked_by) AS bookmarkedBy,
+            JSON_ARRAYAGG(`article_bookmarks`.bookmarked_by) AS bookmarked_by,
             `user`.username, `user`.image
         FROM `article`
         LEFT JOIN `article_likes`
@@ -93,18 +93,18 @@ class Article extends Model
             $articles = $query->fetchAll();
             foreach ($articles as &$article) {
                 $article['tags'] = array_unique(json_decode($article['tags']));
-                $article['likedBy'] = array_unique(json_decode($article['likedBy']));
-                $article['bookmarkedBy'] = array_unique(json_decode($article['bookmarkedBy']));
+                $article['liked_by'] = array_unique(json_decode($article['liked_by']));
+                $article['bookmarked_by'] = array_unique(json_decode($article['bookmarked_by']));
                 // Due to how we'll use these values in the view, we need to check if these arrays
                 // have a single key-value pair, and if it's '0' => 'null', the key has to be removed.
                 if (count($article['tags']) === 1 && $article['tags'][0] === null) {
                     $article['tags'] = null;
                 }
-                if (count($article['likedBy']) === 1 && $article['likedBy'][0] === null) {
-                    $article['likedBy'] = null;
+                if (count($article['liked_by']) === 1 && $article['liked_by'][0] === null) {
+                    $article['liked_by'] = null;
                 }
-                if (count($article['bookmarkedBy']) === 1 && $article['bookmarkedBy'][0] === null) {
-                    $article['bookmarkedBy'] = null;
+                if (count($article['bookmarked_by']) === 1 && $article['bookmarked_by'][0] === null) {
+                    $article['bookmarked_by'] = null;
                 }
             }
             return $articles;
