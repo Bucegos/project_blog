@@ -17,6 +17,7 @@ $dark: #1d2126;
 $backgroundColor: #292e33;
 $grayish: #333940;
 $text: #B2B6BB;
+$tag: #a7adb2;
 $blue: #528BFF;
 $green: #1abb9c;
 $orange: #FF8121;
@@ -187,22 +188,37 @@ $borderRadius: .25rem;
             margin-right: 0.5rem;
           }
         }
-      }      
-      &__info {
-        padding: 1rem;
-        margin-bottom: 1rem;
-        p {
-          &:nth-child(3) {
-            text-transform: uppercase;
-            color: #fff;
-            margin-top: 1rem;
-          }
-        }
       }
-      &__info, &__articles {
+      > div {
         background-color: $backgroundColor;
         border-radius: 0.25rem;
         border: 2px solid $borderGray;
+        &:nth-child(1) {
+          padding: 1rem;
+          margin-bottom: 1rem;
+          p {
+            &:nth-child(3) {
+              text-transform: uppercase;
+              color: #fff;
+              margin-top: 1rem;
+            }
+          }
+        }
+        &:nth-child(2) {
+          h3 {
+            padding: 1rem;
+            border-bottom: 2px solid $borderGray;
+          }
+          > div {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border-bottom: 2px solid $borderGray;
+            &:last-child {
+              border-bottom: unset;
+            }
+          }
+        }
       }
     }
   }

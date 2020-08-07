@@ -27,7 +27,7 @@ if (isset($_SESSION['user'])) {
     </aside>
     <?php Elements::add('article', $article); ?>
     <aside class="article-read__user sticky">
-        <div class="article-read__user__info">
+        <div>
             <div class="profile-image">
                 <a href="/users/<?= $article['username']; ?>">
                     <img src="<?= ASSETS_IMG . "{$article['user_image']}"; ?>" alt="profile" />
@@ -38,18 +38,20 @@ if (isset($_SESSION['user'])) {
             <p>Joined</p>
             <p><?= date("M jS, Y", strtotime($article['user_joined'])); ?></p>
         </div>
-        <div class="article-read__user__articles">
-            <h3>More from <?= $article['username'] ;?></h3>
+        <div>
+            <h3>More from <a href="/users/<?= $article['username'] ;?>"><?= $article['username'] ;?></a></h3>
             <?php foreach ($article['short_articles'] as $shortArticle) : ?>
-                <div class="article__read__user__articles__more">
+                <div>
                     <a href="<?= $shortArticle['slug'] ;?>"><?= $shortArticle['title'] ;?></a>
-                    <?php if (!empty($shortArticle['tags'])) :
-                        foreach ($shortArticle['tags'] as $tag) : ?>
-                            <a href="/tags/<?= $tag ;?>">
-                                <span>#</span><?= $tag; ?>
-                            </a>
-                        <?php endforeach;
-                    endif; ?>
+                    <div>
+                        <?php if (!empty($shortArticle['tags'])) :
+                            foreach ($shortArticle['tags'] as $tag) : ?>
+                                <a class="tag" href="/tags/<?= $tag ;?>">
+                                    <span>#</span><?= $tag; ?>
+                                </a>
+                            <?php endforeach;
+                        endif; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>

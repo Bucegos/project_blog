@@ -17,6 +17,7 @@ $dark: #1d2126;
 $backgroundColor: #292e33;
 $grayish: #333940;
 $text: #B2B6BB;
+$tag: #a7adb2;
 $blue: #528BFF;
 $green: #1abb9c;
 $orange: #FF8121;
@@ -555,14 +556,14 @@ a {
 }
 
 a.tag {
-  color: $text;
+  color: $tag;
   span {
-    color: $text;
+    color: #687078;
   }
   &:hover {
     color: $orange;
     span {
-      color: $text;
+      color: #687078;
     }
   }
 }

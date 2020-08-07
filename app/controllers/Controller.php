@@ -118,6 +118,6 @@ class Controller
      */
     public function slugify(string $string): string
     {
-        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string), '-')) . uniqid();
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string), '-')) . '-' . uniqid();
     }
 }

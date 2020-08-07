@@ -570,11 +570,11 @@ a:hover {
 }
 
 a.tag {
-  color: #B2B6BB;
+  color: #a7adb2;
 }
 
 a.tag span {
-  color: #B2B6BB;
+  color: #687078;
 }
 
 a.tag:hover {
@@ -582,7 +582,7 @@ a.tag:hover {
 }
 
 a.tag:hover span {
-  color: #B2B6BB;
+  color: #687078;
 }
 
 #postRemoveCoverButton {

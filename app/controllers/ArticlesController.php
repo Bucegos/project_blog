@@ -81,7 +81,7 @@ class ArticlesController extends Controller
         // the 'article' element.
         if ($article !== false) {
             $article = $article[0];
-            $article['short_articles'] = $Article->getArticlesShort($this->getUserId());
+            $article['short_articles'] = $Article->getArticlesShort($this->getUserId(), $slug);
         }
         $this->render('articles' , 'read', [
             'title' => $article['title'],

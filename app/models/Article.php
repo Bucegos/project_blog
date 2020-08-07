@@ -68,7 +68,7 @@ class Article extends Model
     {
         $sql = 'SELECT `article`.id, `article`.title, `article`.content,
             `article`.cover, `article`.created_at, `article`.slug,
-            count(DISTINCT `article_likes`.liked_by) as liked_by,
+            count(DISTINCT `article_likes`.liked_by) as likes,
             JSON_ARRAYAGG(`article_likes`.liked_by) AS liked_by,
             JSON_ARRAYAGG(`tag`.name) AS tags,
             JSON_ARRAYAGG(`article_bookmarks`.bookmarked_by) AS bookmarked_by,
@@ -118,10 +118,11 @@ class Article extends Model
 
     /**
      * Query used to get a limited number of articles with the user and tags related info.
-     * @param int $userId User id.
+     * @param int $userId  User id.
+     * @param string $slug The current article's slug, added in where clause so we won't show the same article the user is on in the 'more' section.
      * @return array|false
      */
-    public function getArticlesShort(int $userId)
+    public function getArticlesShort(int $userId, string $slug)
     {
         $sql = 'SELECT `article`.id, `article`.title, `article`.slug,
             JSON_ARRAYAGG(`tag`.name) AS tags
@@ -130,13 +131,18 @@ class Article extends Model
             ON `article`.id = `article_tags`.article_id
         LEFT JOIN `tag`
             ON `article_tags`.tag_id = `tag`.id
-        WHERE `article`.status = "approved" AND `article`.author_id = :user_id
+        WHERE `article`.status = "approved"
+            AND `article`.author_id = :user_id
+            AND `article`.slug != :slug
         GROUP BY `article`.id
         ORDER BY RAND()
         LIMIT 3';
         try {
             $query = $this->pdo->prepare($sql);
-            $query->execute([':user_id' => $userId]);
+            $query->execute([
+                ':user_id' => $userId,
+                'slug' => $slug,
+            ]);
             $articles = $query->fetchAll();
             foreach ($articles as &$article) {
                 $article['tags'] = array_unique(json_decode($article['tags']));
