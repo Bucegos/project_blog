@@ -23,13 +23,16 @@
                         <?= date("M jS, Y", strtotime($data['created_at'])); ?>
                     </p>
                 </div>
-                <button
-                    class="button--like <?= $data['liked_by_current_user'] ? 'liked' : null; ?>"
-                    type="button"
-                    data-article-id="<?=$data['id'];?>"
-                    title="<?= $data['liked_by_current_user'] ? 'Unlike article' : 'Like article'; ?>"
-                >
-                </button>
+                <div>
+                    <button
+                        class="button--like <?= $data['liked_by_current_user'] ? 'liked' : null; ?>"
+                        type="button"
+                        data-article-id="<?=$data['id'];?>"
+                        title="<?= $data['liked_by_current_user'] ? 'Unlike article' : 'Like article'; ?>"
+                    >
+                    </button>
+                    <span class="button--like__count muted"><?= $data['likes'] ;?></span>
+                </div>
             </div>
         <?php endif; ?>
         <div class="article__title <?= $useMini ? 'article__title--mini' : '' ;?>">

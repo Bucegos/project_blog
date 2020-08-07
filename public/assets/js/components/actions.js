@@ -8,6 +8,7 @@ export default class Actions {
     constructor(Utils, Notification) {
         this.Utils = Utils
         this.Notification = Notification
+        this.readingListCount = document.getElementById('readingListCount')
         document.querySelectorAll('.button--like').forEach(item => {
             this.like(item)
         })
@@ -25,10 +26,14 @@ export default class Actions {
             }
             if (item.classList.contains('liked')) {
                 this.Utils.fetchJsonData(ROUTES.USER_REMOVE, data)
-                  .then(data => {
+                  .then(data => { console.log(parseInt(item.nextElementSibling.innerHTML))
                     if (data.result) {
                         item.classList.remove('liked')
                         item.setAttribute('title', 'Like article')
+                        let likes = parseInt(item.nextElementSibling.innerHTML)
+                        if (likes > 0) {
+                            item.nextElementSibling.innerHTML = likes - 1
+                        }
                         this.disableButton(item)
                     } else {
                         this.Notification.show({
@@ -45,6 +50,8 @@ export default class Actions {
                         item.setAttribute('title', 'Unlike article')
                         item.classList.add('liked')
                         item.classList.add('animate')
+                        let likes = parseInt(item.nextElementSibling.innerHTML)
+                        item.nextElementSibling.innerHTML = likes + 1
                         setTimeout(() => {
                             item.classList.remove('animate')
                         }, 2000)
@@ -73,6 +80,10 @@ export default class Actions {
                       if (data.result) {
                           item.setAttribute('title', 'Bookmark article')
                           item.classList.remove('bookmarked')
+                          let readingListCount = parseInt(this.readingListCount.innerHTML)
+                          if (readingListCount > 0) {
+                              this.readingListCount.innerHTML = readingListCount - 1
+                          }
                           this.disableButton(item)
                           if (item.classList.contains('button--bookmark--mini')) {
                               item.getElementsByTagName('i')[0].classList.replace('fas', 'far')
@@ -93,6 +104,8 @@ export default class Actions {
                       if (data.result) {
                           item.setAttribute('title', 'Remove bookmark')
                           item.classList.add('bookmarked')
+                          let readingListCount = parseInt(this.readingListCount.innerHTML)
+                          this.readingListCount.innerHTML = readingListCount + 1
                           if (item.classList.contains('button--bookmark--mini')) {
                               item.getElementsByTagName('i')[0].classList.replace('far', 'fas')
                           } else {

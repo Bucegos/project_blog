@@ -44,6 +44,15 @@ $borderRadius: .25rem;
     .profile-image {
       margin-right: 0.5rem;
     }
+    > div:last-child {
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      span {
+        margin-top: 0.3rem;
+        align-self: center;
+      }
+    }
   }
   &__container {
     padding: 1rem;
@@ -171,6 +180,16 @@ $borderRadius: .25rem;
     .article {
       // to create the gap between the asides and article
       width: 65%;
+    }
+    &__actions {
+      div {
+        display: flex;
+        flex-direction: column;
+        span {
+          margin-top: 0.3rem;
+          align-self: center;
+        }
+      }
     }
     aside {
       display: flex;

@@ -8,13 +8,16 @@ if (isset($_SESSION['user'])) {
 ?>
 <section class="article-read container">
     <aside class="article-read__actions sticky">
-        <button
-            class="button--like <?= $article['liked_by_current_user'] ? 'liked' : null; ?>"
-            type="button"
-            data-article-id="<?= $article['id']; ?>"
-            title="<?= $article['liked_by_current_user'] ? 'Unlike article' : 'Like article'; ?>"
-        >
-        </button>
+        <div>
+            <button
+                class="button--like <?= $article['liked_by_current_user'] ? 'liked' : null; ?>"
+                type="button"
+                data-article-id="<?= $article['id']; ?>"
+                title="<?= $article['liked_by_current_user'] ? 'Unlike article' : 'Like article'; ?>"
+            >
+            </button>
+            <span class="button--like__count muted"><?= $article['likes'] ;?></span>
+        </div>
         <button
             class="button button--bookmark button--bookmark--mini <?= $article['bookmarked_by_current_user'] ? 'bookmarked' : null; ?>"
             type="button"
@@ -23,7 +26,6 @@ if (isset($_SESSION['user'])) {
         >
             <i class="<?= $article['bookmarked_by_current_user'] ? 'fas' : 'far' ;?> fa-bookmark"></i>
         </button>
-
     </aside>
     <?php Elements::add('article', $article); ?>
     <aside class="article-read__user sticky">

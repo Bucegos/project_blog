@@ -35,6 +35,17 @@
   margin-right: 0.5rem;
 }
 
+.article__info > div:last-child {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.article__info > div:last-child span {
+  margin-top: 0.3rem;
+  align-self: center;
+}
+
 .article__container {
   padding: 1rem;
 }
@@ -169,6 +180,16 @@
 
 .article-read .article {
   width: 65%;
+}
+
+.article-read__actions div {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-read__actions div span {
+  margin-top: 0.3rem;
+  align-self: center;
 }
 
 .article-read aside {

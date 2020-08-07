@@ -46,7 +46,11 @@ use App\Model\User;
                     <ul class="dropdown__content">
                         <li class="dropdown__item">
                             <a href="/account/reading-list">
-                                Reading list[<?= isset($data['user']['bookmarks_count']) ? $data['user']['bookmarks_count'] : 0; ?>]
+                                Reading list [
+                                <span id="readingListCount" >
+                                    <?= isset($data['user']['bookmarks_count']) ? $data['user']['bookmarks_count'] : 0; ?>
+                                </span>
+                                ]
                             </a>
                         </li>
                         <li class="dropdown__item"><a href="/account/dashboard">Dashboard</a></li>
