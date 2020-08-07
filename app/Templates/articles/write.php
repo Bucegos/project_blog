@@ -20,19 +20,22 @@ use App\Helper\Elements;
                 <input id="articleCoverFilename" type="hidden" name="cover" />
                 <input class="article__input article__input--title" type="text" name="title" placeholder="New article title here..." aria-label="title" required>
                 <div>
-                    <h5>Select up to 4 tags(hold CTRL + click)</h5>
-                    <select class="article__input--tags" name="tags[]" multiple>
-                        <?php foreach ($data['tags'] as $tag) : ?>
-                            <option
+                    <p class="article__input--title">Tag your article:</p>
+                    <?php foreach ($data['tags'] as $key => $tag) : ?>
+                        <div class="article__input--tags">
+                            <input
                                 class="article__input--tag"
+                                type="checkbox"
                                 value="<?= $tag['id']; ?>"
+                                name="tags[<?= $key ;?>]"
                                 title="<?= $tag['description']; ?>"
-                                style="background-color: <?=$tag['color']; ?>"
-                            >
-                                <?= $tag['name']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                            />
+                            <label class="article__label--tag"
+                                   style="background-color: <?=$tag['color']; ?>"
+                            >#<?= $tag['name']; ?>
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
                 <textarea class="article__input article__input--content" rows="10" name="content" placeholder="Write your article here..." aria-label="content"></textarea>
                 <p class="error"></p>

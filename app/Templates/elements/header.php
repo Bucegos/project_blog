@@ -44,21 +44,27 @@ use App\Model\User;
                         <img src="<?= ASSETS_IMG . "{$data['user']['image']}"; ?>" alt="profile" />
                     </button>
                     <ul class="dropdown__content">
-                        <li class="dropdown__item">
-                            <a href="/account/reading-list">
-                                Reading list [
-                                <span id="readingListCount" >
-                                    <?= isset($data['user']['bookmarks_count']) ? $data['user']['bookmarks_count'] : 0; ?>
-                                </span>
-                                ]
-                            </a>
-                        </li>
-                        <li class="dropdown__item"><a href="/account/dashboard">Dashboard</a></li>
-                        <li class="dropdown__item"><a href="/account/drafts">Drafs[0]</a></li>
-                        <li class="dropdown__item"><a href="/account/settings">Account Settings</a></li>
                         <?php if ($data['user']['role'] === User::ADMIN) : ?>
                             <li class="dropdown__item navigation__user__admin"><a href="/admin">Admin</a></li>
                         <?php endif; ?>
+                        <li class="dropdown__item">
+                            <a href="/account/reading-list">
+                                Reading list
+                            </a>
+                            <span class="counter" id="bookmarksCount" >
+                                <?= isset($data['user']['bookmarks_count']) ? $data['user']['bookmarks_count'] : 0; ?>
+                            </span>
+                        </li>
+                        <li class="dropdown__item"><a href="/account/dashboard">Dashboard</a></li>
+                        <li class="dropdown__item">
+                            <a href="/account/drafts">
+                                Drafs
+                            </a>
+                            <span class="counter" id="draftsCount" >
+                                <?= isset($data['user']['drafts_count']) ? $data['user']['drafts_count'] : 0; ?>
+                            </span>
+                        </li>
+                        <li class="dropdown__item"><a href="/account/settings">Account Settings</a></li>
                         <li>
                             <button class="button button--secondary" onclick="location.href='/auth/logout'" type="button">
                                 Logout

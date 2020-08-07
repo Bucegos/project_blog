@@ -8,7 +8,7 @@ export default class Actions {
     constructor(Utils, Notification) {
         this.Utils = Utils
         this.Notification = Notification
-        this.readingListCount = document.getElementById('readingListCount')
+        this.bookmarksCount = document.getElementById('bookmarksCount')
         document.querySelectorAll('.button--like').forEach(item => {
             this.like(item)
         })
@@ -80,9 +80,9 @@ export default class Actions {
                       if (data.result) {
                           item.setAttribute('title', 'Bookmark article')
                           item.classList.remove('bookmarked')
-                          let readingListCount = parseInt(this.readingListCount.innerHTML)
-                          if (readingListCount > 0) {
-                              this.readingListCount.innerHTML = readingListCount - 1
+                          let bookmarksCount = parseInt(this.bookmarksCount.innerHTML)
+                          if (bookmarksCount > 0) {
+                              this.bookmarksCount.innerHTML = bookmarksCount - 1
                           }
                           this.disableButton(item)
                           if (item.classList.contains('button--bookmark--mini')) {
@@ -104,8 +104,8 @@ export default class Actions {
                       if (data.result) {
                           item.setAttribute('title', 'Remove bookmark')
                           item.classList.add('bookmarked')
-                          let readingListCount = parseInt(this.readingListCount.innerHTML)
-                          this.readingListCount.innerHTML = readingListCount + 1
+                          let bookmarksCount = parseInt(this.bookmarksCount.innerHTML)
+                          this.bookmarksCount.innerHTML = bookmarksCount + 1
                           if (item.classList.contains('button--bookmark--mini')) {
                               item.getElementsByTagName('i')[0].classList.replace('far', 'fas')
                           } else {

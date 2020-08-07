@@ -395,11 +395,20 @@ a {
     right: 0;
     top: 3rem;
     padding: 1rem;
-    box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.75);
+    box-shadow: 0 0 17px 0 rgba(0,0,0,0.75);
   }
   &__item {
-    margin-bottom: 0.5rem;
+    position: relative;
     white-space: nowrap;
+    border-radius: 0.25rem;
+    &:hover {
+      background-color: #444F5B;
+    }
+    a {
+      display: inline-block;
+      width: 100%;
+      padding: 0.5rem;
+    }
   }
   ul {
     list-style: none;
@@ -460,17 +469,18 @@ a {
   align-items: center;
   padding: 0.5rem 5rem;
   background-color: $backgroundColor;
-  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.75);
   &__menu {
     display: flex;
     align-items: center;
     list-style: none;
     margin-left: auto;
-    li:first-child {
+    > li:first-child {
       margin-right: 1rem;
     }
     li + li ul li:last-child {
       text-align: center;
+      margin-top: 1rem;
     }
   }
 }
@@ -515,11 +525,11 @@ a {
   align-items: center;
   background-color: $backgroundColor;
   z-index: 999;
-  top: 100%;
+  top: 110%;
   left: 2rem;
   padding: 1rem;
   border-radius: 0.25rem;
-  box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.75);
+  box-shadow: 0 0 17px 0 rgba(0,0,0,0.75);
   &--show {
     top: 85%;
     opacity: 1;
@@ -567,7 +577,13 @@ a.tag {
   }
 }
 
-#postRemoveCoverButton {
-  color: #DC3545;
-  background: unset;
+.counter {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: #191E25;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  user-select: none;
 }

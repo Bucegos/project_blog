@@ -119,7 +119,7 @@ class User extends Model
      * @param int $userId User id.
      * @return int|false
      */
-    public function getReadinglistCount(int $userId)
+    public function getBookmarksCount(int $userId)
     {
         $sql = "SELECT COUNT(*) FROM `article_bookmarks` WHERE `article_bookmarks`.bookmarked_by = :userId";
         try {
@@ -129,7 +129,27 @@ class User extends Model
             ]);
             return $query->fetchColumn();
         } catch (PDOException $e) {
-            Logger::logError($e->getMessage(), "getReadinglistCount");
+            Logger::logError($e->getMessage(), 'getBookmarksCount');
+            return false;
+        }
+    }
+
+    /**
+     * Method used to get the reading list count.
+     * @param int $userId User id.
+     * @return int|false
+     */
+    public function getDraftsCount(int $userId)
+    {
+        $sql = "SELECT COUNT(*) FROM `article` WHERE `article`.status = 'draft' AND `article`.author_id = :userId";
+        try {
+            $query = $this->pdo->prepare($sql);
+            $query->execute([
+                ":userId" => $userId,
+            ]);
+            return $query->fetchColumn();
+        } catch (PDOException $e) {
+            Logger::logError($e->getMessage(), 'getBookmarksCount');
             return false;
         }
     }

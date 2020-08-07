@@ -4,9 +4,11 @@ namespace App\Controller;
 use App\Helper\Elements;
 use App\Helper\Request;
 use App\Model\Model;
-use App\Model\Role;
+use App\Model\User;
+
 /**
  * Main app controller.
+ * @property User $User
  */
 class Controller
 {
@@ -87,7 +89,10 @@ class Controller
         // user data.
         if (isset($_SESSION['user'])) {
             $data['user'] = $_SESSION['user'];
-            $data['user']['bookmarks_count'] = $this->model('user')->getReadinglistCount((int)$data['user']['id']);
+            /** @var User $User */
+            $User = $this->model('user');
+            $data['user']['bookmarks_count'] = $User->getBookmarksCount((int)$data['user']['id']);
+            $data['user']['drafts_count'] = $User->getDraftsCount((int)$data['user']['id']);
         }
         // setting the response for the view.
         if (isset($_SESSION['response'])) {
