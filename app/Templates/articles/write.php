@@ -31,7 +31,7 @@ use App\Helper\Elements;
                                 title="<?= $tag['description']; ?>"
                             />
                             <label class="article__label--tag"
-                                   style="background-color: <?=$tag['color']; ?>"
+                                   style="background-color: <?= $tag['color']; ?>"
                             >#<?= $tag['name']; ?>
                             </label>
                         </div>
