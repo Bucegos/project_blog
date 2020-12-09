@@ -1,9 +1,6 @@
 <?php
 /**
- * |--------------------------------------------------------------------------
- * | Custom autoload function
- * |--------------------------------------------------------------------------
- * | Used to autoload classes from AUTOLOAD_CLASSES constant.
+ * Used to autoload classes from AUTOLOAD_CLASSES constant.
  * @param string $class
  * @return void
  */

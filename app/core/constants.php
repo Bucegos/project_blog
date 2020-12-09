@@ -12,7 +12,7 @@ define('VENDOR', HOST . '/vendor/');
 // Database info
 define('DATABASE_SERVERNAME', 'localhost');
 define('DATABASE_USERNAME', 'root');
-define('DATABASE_PASSWORD', 'K!illerH!ills007');
+define('DATABASE_PASSWORD', 'dev');
 define('DATABASE_NAME', 'blog');
 // App directory path
 define('APP_ROOT', dirname(__DIR__, 1));

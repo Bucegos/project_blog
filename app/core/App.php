@@ -15,8 +15,12 @@ class App
     public function __construct()
     {
         $url = $this->__parseUrl();
-        $this->__setController($url[0]);
-        unset($url[0]);
+        if (is_array($url)) {
+            $this->__setController($url[0]);
+            unset($url[0]);
+        } else {
+            $this->__setController();
+        }
         $this->controller = new $this->controller;
         if (isset($url[1])) {
             $this->__setMethod($url[1]);

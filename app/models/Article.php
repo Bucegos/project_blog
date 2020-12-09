@@ -66,29 +66,29 @@ class Article extends Model
      */
     public function getArticlesFull(?string $slug = null)
     {
-        $sql = 'SELECT `article`.id, `article`.title, `article`.content,
-            `article`.cover, `article`.created_at, `article`.slug,
+        $sql = 'SELECT `articles`.id, `articles`.title, `articles`.content,
+            `articles`.cover, `articles`.created_at, `articles`.slug,
             count(DISTINCT `article_likes`.liked_by) as likes,
             JSON_ARRAYAGG(`article_likes`.liked_by) AS liked_by,
-            JSON_ARRAYAGG(`tag`.name) AS tags,
+            JSON_ARRAYAGG(`tags`.name) AS tags,
             JSON_ARRAYAGG(`article_bookmarks`.bookmarked_by) AS bookmarked_by,
-            `user`.username, `user`.summary as user_summary, `user`.image as user_image, `user`.joined as user_joined
-        FROM `article`
+            `users`.username, `users`.summary as user_summary, `users`.image as user_image, `users`.joined as user_joined
+        FROM `articles`
         LEFT JOIN `article_likes`
-            ON `article`.id = `article_likes`.article_id
+            ON `articles`.id = `article_likes`.article_id
         LEFT JOIN `article_tags`
-            ON `article`.id = `article_tags`.article_id
+            ON `articles`.id = `article_tags`.article_id
         LEFT JOIN `article_bookmarks`
-            ON `article`.id = `article_bookmarks`.article_id
-        LEFT JOIN `tag`
-            ON `article_tags`.tag_id = `tag`.id
-        LEFT JOIN `user`
-            ON `article`.author_id = `user`.id
-        WHERE `article`.status = "approved"';
+            ON `articles`.id = `article_bookmarks`.article_id
+        LEFT JOIN `tags`
+            ON `article_tags`.tag_id = `tags`.id
+        LEFT JOIN `users`
+            ON `articles`.author_id = `users`.id
+        WHERE `articles`.status = "approved"';
         if ($slug !== null) {
-            $sql .= " AND `article`.slug = '{$slug}' GROUP BY `article`.id";
+            $sql .= " AND `articles`.slug = '{$slug}' GROUP BY `articles`.id";
         } else {
-            $sql .= " GROUP BY `article`.id";
+            $sql .= " GROUP BY `articles`.id";
         }
         try {
             $query = $this->pdo->query($sql);

@@ -2,7 +2,6 @@
 use App\Helper\Elements;
 ?>
 <section class="article-write container">
-    <?php if (isset($data['user'])) : ?>
         <div class="article-write__actions">
             <button class="button button--outline button--outline--active" id="articleEditButton">Edit</button>
             <button class="button button--outline" id="articlePreviewButton">Preview</button>
@@ -48,7 +47,6 @@ use App\Helper\Elements;
         <div class="article-write__preview hide">
             testing preview
         </div>
-    <?php else : ?>
         <div class="article-write__login">
             <div class="article-write__login__message">
                 <img src="<?= ASSETS_IMG . 'logo.svg'; ?>" alt="logo" />
@@ -61,5 +59,4 @@ use App\Helper\Elements;
                 <?php Elements::add('login'); ?>
             </div>
         </div>
-    <?php endif; ?>
 </section>

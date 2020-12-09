@@ -33,6 +33,7 @@ export default class Notification {
             this.notificationMessage.innerHTML = options.message
             this.notificationsImg.src = options.imgPath
         }
+        this.notification.classList.add('notification--show')
         this.notification.animate([
             {
                 top: '100%',
@@ -46,7 +47,6 @@ export default class Notification {
             duration: 500,
             },
         )
-        this.notification.classList.add('notification--show')
         setTimeout(() => {
             this.notification.animate([
                 {top: '85%'},
@@ -56,6 +56,6 @@ export default class Notification {
                 },
             )
             this.notification.classList.remove('notification--show')
-        }, 4000)
+        }, 3000)
     }
 }

@@ -17,6 +17,7 @@ class HomeController extends Controller
         /** @var Article $Article */
         $Article = $this->model('Article');
         $articles = $Article->getArticlesFull();
+//        var_dump($articles); die;
         $this->render('home', 'index', [
             'title' => 'Home',
             'articles' => $articles,

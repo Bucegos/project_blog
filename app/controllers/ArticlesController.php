@@ -79,9 +79,10 @@ class ArticlesController extends Controller
         // condition applied, but in this case we expect only one, based on slug, so if
         // the query was successfull, we'll only send that to the view due to how we built
         // the 'article' element.
+//        var_dump($Article->getArticlesShort(9, $slug)); die;
         if ($article !== false) {
             $article = $article[0];
-            $article['short_articles'] = $Article->getArticlesShort($this->getUserId(), $slug);
+            $article['short_articles'] = $Article->getArticlesShort(9, $slug);
         }
         $this->render('articles' , 'read', [
             'title' => $article['title'],

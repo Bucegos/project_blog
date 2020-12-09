@@ -60,12 +60,12 @@ class Controller
 
     /**
      * Echo a json response.
-     * @param array $result
+     * @param array $response
      * @return void
      */
-    protected function newJsonResponse(array $result): void
+    protected function newJsonResponse(array $response): void
     {
-        echo json_encode($result, JSON_PRETTY_PRINT);
+        echo json_encode($response, JSON_PRETTY_PRINT);
     }
 
     /**

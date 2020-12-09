@@ -1,31 +1,31 @@
 <?php
 use App\Helper\Elements;
 $article = $data['article'];
-if (isset($_SESSION['user'])) {
-    $article['bookmarked_by_current_user'] = $article['bookmarked_by'][0] === (int)$_SESSION['user']['id'];
-    $article['liked_by_current_user'] = $article['liked_by'][0] === (int)$_SESSION['user']['id'];
-}
-?>
+//if (isset($_SESSION['user'])) {
+//    $article['bookmarked_by_current_user'] = $article['bookmarked_by'][0] === (int)$_SESSION['user']['id'];
+//    $article['liked_by_current_user'] = $article['liked_by'][0] === (int)$_SESSION['user']['id'];
+//}
+//?>
 <section class="article-read container">
     <aside class="article-read__actions sticky">
         <div>
-            <button
-                class="button--like <?= $article['liked_by_current_user'] ? 'liked' : null; ?>"
-                type="button"
-                data-article-id="<?= $article['id']; ?>"
-                title="<?= $article['liked_by_current_user'] ? 'Unlike article' : 'Like article'; ?>"
-            >
-            </button>
+<!--            <button-->
+<!--                class="button--like --><?//= $article['liked_by_current_user'] ? 'liked' : null; ?><!--"-->
+<!--                type="button"-->
+<!--                data-article-id="--><?//= $article['id']; ?><!--"-->
+<!--                title="--><?//= $article['liked_by_current_user'] ? 'Unlike article' : 'Like article'; ?><!--"-->
+<!--            >-->
+<!--            </button>-->
             <span class="button--like__count muted"><?= $article['likes'] ;?></span>
         </div>
-        <button
-            class="button button--bookmark button--bookmark--mini <?= $article['bookmarked_by_current_user'] ? 'bookmarked' : null; ?>"
-            type="button"
-            data-article-id="<?=$article['id'];?>"
-            title="<?= $article['bookmarked_by_current_user'] ? 'Remove bookmark' : 'Bookmark article'; ?>"
-        >
-            <i class="<?= $article['bookmarked_by_current_user'] ? 'fas' : 'far' ;?> fa-bookmark"></i>
-        </button>
+<!--        <button-->
+<!--            class="button button--bookmark button--bookmark--mini --><?//= $article['bookmarked_by_current_user'] ? 'bookmarked' : null; ?><!--"-->
+<!--            type="button"-->
+<!--            data-article-id="--><?//=$article['id'];?><!--"-->
+<!--            title="--><?//= $article['bookmarked_by_current_user'] ? 'Remove bookmark' : 'Bookmark article'; ?><!--"-->
+<!--        >-->
+<!--            <i class="--><?//= $article['bookmarked_by_current_user'] ? 'fas' : 'far' ;?><!-- fa-bookmark"></i>-->
+<!--        </button>-->
     </aside>
     <?php Elements::add('article', $article); ?>
     <aside class="article-read__user sticky">
